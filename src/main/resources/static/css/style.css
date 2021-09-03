@@ -1,0 +1,22 @@
+@charset "UTF-8";
+#wrap {width:800px; height:700px; margin:auto;}
+#signInBox {width:800px; height:700px;}
+.loginLogo {width:350px; height:350px;}
+.loginFrame {width:350px; height:500px;}
+.loginBox {width:350px; height:400px; border:solid 1px rgb(217,217,217);}
+.moveToSignUpBox {width:350px; height:70px; border:solid 1px rgb(217,217,217);}
+.loginText{font-size:15px;}
+.loginText::placeholder{
+	color:grey;
+	font-size:13px;
+}
+.signInBtn {background-color:rgb(255,122,47); color:white;}
+hr {border:solid 0.5px rgb(217,217,217); width:262.5px}
+.loginWarning {font-size:13px; color:red;}
+.findFont {font-size:13px;}
+.findFont a {text-decoration:none;}
+.findFont a:link{color:black;}
+.findFont a:visited{color:black;}
+.findFont a:hover{color:black;}
+.findFont a:active{color:black;}
+.moveToSignUpBox a {text-decoration:none;}
