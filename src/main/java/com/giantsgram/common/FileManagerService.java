@@ -8,16 +8,17 @@ import java.nio.file.Paths;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+@Component
 public class FileManagerService {
 
 	// 로그 찍기용
 		private Logger logger = LoggerFactory.getLogger(this.getClass());
 		
-		//TODO
 		// 이미지 저장 경로
-		public final static String FILE_UPLOAD_PATH="C:\\springproject\\projectquiz\\projectQuizWorkspace\\lhcgram\\images/";
+		public final static String FILE_UPLOAD_PATH="C:\\team SNS\\workspace\\Giantsgram\\images/";
 		
 		// 이미지 저장
 		public String saveFile(String userLoginId, MultipartFile file) throws IOException {

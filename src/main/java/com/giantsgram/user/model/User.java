@@ -11,9 +11,16 @@ public class User {
 	private String nickname;
 	private String phoneNumber;
 	private String email;
+	private String imagePath;
 	private Date createdAt;
 	private Date updatedAt;
 	
+	public String getImagePath() {
+		return imagePath;
+	}
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
 	public int getId() {
 		return id;
 	}

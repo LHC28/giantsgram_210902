@@ -1,0 +1,62 @@
+@charset "UTF-8";
+#wrap {height:55px; margin:auto;}
+header{border-bottom:solid 1px rgb(217,217,217);}
+#headerBox{width:975px; height:54px;}
+#emptyHeader {height:30px;} /* 헤더와 section의 칸 띄우기용 */
+.homeLogo:link {color:rgb(255,122,47);}
+.homeLogo:visited {color:rgb(255,122,47);}
+.homeLogo:hover {color:rgb(255,122,47); text-decoration:none;}
+.homeLogo:active {color:rgb(255,122,47);}
+.iconBox {height:54px; width:120px;}
+
+.sectionBox {width:935px;}
+.timelineBox {width:614px; font-size:13px; border:solid 1px rgb(217,217,217);} /* 높이는 임시 */
+.timelineTitleBox {height:60px; border-bottom: solid 1px rgb(217,217,217);}
+.propileImage {width:35px; height:35px; border-radius:70%;}
+section a:hover {color:black; text-decoration:none;}
+section a:link {color:black;}
+section a:visited {color:black;}
+section a:active {color:black;}
+
+.timelinePicture{width:614px; height:614px;}
+.timelineIconBox {width:614px; height:50px; border: solid 1px rgb(217,217,217);}
+.entireCommentBtn {width:614px; height:10px;}
+.dateFont {font-size:10px; color:rgb(217,217,217);}
+.commentAddBox {width:614px;}
+.commentBar {width:530px; border:none;}
+.commentAddBtn {width:50px; font-size:13px; background-color:rgb(255,122,47); color:white;}
+
+.friendBox {width:321px; height:500px; border: solid 1px rgb(217,217,217);}
+.friendboxProfilePicture {width:60px; height:60px; border-radius:70%;}
+.friendBoxPorfile {height:60px; font-size:12px;}
+.friendboxFriendPicture {width:50px; height:50px; border-radius:70%;}
+
+.postBox{width:975px;}
+.postContentBox {width:335px;}
+.postPicture {width:598px; height:598px; background-color:blue;}
+.postHeader{height:72px; background-color:green;}
+.postContent {height:390px; background-color:grey;}
+.postIcon {height:80px; background-color:red;}
+.postComment {height:56px; background-color:yellow;}
+
+.pageBox {width:975px;}
+.pageBoxHeader{height:250px;}
+.pageBoxHeaderPicture {width:250px; height:250px;}
+.pageBoxHeaderContent {width:250px; height:150px;}
+.goProfileBtn {background-color:rgb(255,122,47); color:white; font-size:10px;}
+.contentChoiceBox {height:53px; border-top:solid 1px rgb(217,217,217);}
+.pageBoxContent {height:100px;}
+
+.profileChangeBox {width:700px; height:650px; border: solid 1px rgb(217,217,217);}
+.profileChangeBoxTitle {height:80px;}
+.profileChangeContentBox {width:600px; height:500px;}
+.profileChangeContentBoxPart {width:300px; height:70px;}
+.profileChangeContentBoxPartName {width:194px; height:32px;}
+.profileChangeContentBoxPartContent {width:355px; height:32px; font-size:15px;}
+.profileChangeContentBoxPartPicture {width:300px; height:140px; border: solid 1px rgb(217,217,217);}
+.profileChangeBtn {font-size:10px; color:white; background-color:rgb(255,122,47);}
+
+.uploadBox {width:500px; height:400px;}
+.uploadBoxTitle{height:70px; border: 1px solid rgb(217,217,217); border-bottom:none;}
+.uploadBoxContent {height:330px; border: 1px solid rgb(217,217,217);}
+.postBtn {background-color:rgb(255,122,47); color:white;}

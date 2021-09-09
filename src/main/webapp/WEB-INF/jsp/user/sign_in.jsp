@@ -27,10 +27,10 @@
 						<div class="loginBox ml-4">
 							<h2 class="text-center p-4">Giantsgram</h2>
 							<div class="d-flex justify-content-center">
-								<input type="text" class="form-control col-9 loginText" placeholder="아이디를 입력하세요.">
+								<input type="text" id="loginId" class="form-control col-9 loginText" placeholder="아이디를 입력하세요.">
 							</div>
 							<div class="d-flex justify-content-center">
-								<input type="password" class="form-control col-9 mt-3 loginText" placeholder="비밀번호를 입력하세요.">
+								<input type="password" id="password" class="form-control col-9 mt-3 loginText" placeholder="비밀번호를 입력하세요.">
 							</div>
 							<div class="d-flex justify-content-center mt-3">
 								<input type="button" class="btn signInBtn col-9 mt-3 loginText" value="로그인">
@@ -45,7 +45,7 @@
 							</div>
 						</div>
 						<div class="moveToSignUpBox ml-4 mt-4 d-flex align-items-center justify-content-center">
-							<span><a href="#">회원가입</a> 하기</span>
+							<span><a href="/user/sign_up_view" class="font-weight-bold">회원가입</a> 하기</span>
 						</div>
 					</div>
 				</div>
@@ -53,4 +53,36 @@
 		</div>
 	</div>
 </body>
+<script>
+	$(document).ready(function(){
+		$('.signInBtn').on('click', function(e){
+			let loginId = $('#loginId').val();
+			if(loginId==''){
+				alert("아이디를 입력해주세요.");
+				return;
+			}
+			let password = $('#password').val();
+			if(password==''){
+				alert("비밀번호를 입력하세요.");
+				return;
+			}
+			
+			$.ajax({
+				type:'post'
+				,url:'/user/sign_in'
+				,data:{'loginId':loginId, 'password':password}
+				,success: function(data){
+					if(data.result==true){
+						alert("로그인 완료");
+						location.href="/timeline/post_list_view"
+					}else{
+						alert("로그인 실패. 아이디와 비밀번호를 확인해주세요.");
+					}
+				},error:function(request,status,error){
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				}
+			});
+		});
+	});
+</script>
 </html>
