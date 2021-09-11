@@ -39,4 +39,12 @@ public class PostBO {
 	public void postDelete(int postId) {
 		postDAO.postDelete(postId);
 	}
+	
+	public int countPost(int userId) {
+		return postDAO.countPost(userId);
+	}
+	
+	public List<Post> getPostListByUserId(int userId){
+		return postDAO.getPostListByUserId(userId);
+	}
 }

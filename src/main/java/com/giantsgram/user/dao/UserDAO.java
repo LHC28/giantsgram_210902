@@ -1,5 +1,7 @@
 package com.giantsgram.user.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -31,4 +33,6 @@ public interface UserDAO {
 			,@Param("phoneNumber") String phoneNumber
 			,@Param("email") String email
 			,@Param("imagePath") String imagePath);
+	
+	public List<User> getUserList();
 }

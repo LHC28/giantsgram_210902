@@ -12,7 +12,7 @@
 				<c:if test="${not empty loginId}">
 				<a href="/post/add_post"><img src = "/static/images/pencil.png" alt="게시글 등록 버튼" width="30px" height="30px" class="ml-2"></a>
 				<a href="/timeline/post_list_view"><img src = "/static/images/home button.svg" alt="홈버튼" width="30px" height="30px" class="ml-2"></a>
-				<a href="/user/change_profile_view"><img src ="/static/images/user.png" alt="홈버튼" width="30px" height="30px" class="mr-3 ml-2"></a>
+				<a href="/page/my_page_view"><img src ="/static/images/user.png" alt="홈버튼" width="30px" height="30px" class="mr-3 ml-2"></a>
 				</c:if>
 			</div>
 		</div>

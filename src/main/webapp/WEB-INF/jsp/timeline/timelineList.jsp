@@ -79,6 +79,7 @@
 	</c:forEach>
 	</div>
 	
+	<%-- 타임라인 오른쪽 친구창 --%>
 	<div class="friendBox ml-4">
 		<div class="ml-2 mt-2 mb-2">
 			<div class="d-flex">
@@ -95,16 +96,28 @@
 				<a href="#"><div style="font-weight:bold;" class="mr-1">모두 보기</div></a>
 			</div>
 			<%-- 반복해서 5개 추가 예정 --%>
+			<c:forEach var="notFriend" items="${notFriendList}">
 			<div class="d-flex align-items-center justify-content-between ml-1">
+				
 				<div class="d-flex align-items-center">
-					<img src="/static/images/player.jpg" alt="프로필 사진" class="friendboxFriendPicture">
+					<c:if test="${notFriend.imagePath ne null }">
+					<img src="${notFriend.imagePath}" alt="프로필 사진" class="friendboxFriendPicture">
+					</c:if>
+					<c:if test="${notFriend.imagePath eq null }">
+					<img src="/static/images/user.png" alt="프로필 사진" class="friendboxFriendPicture">
+					</c:if>
 					<div class="ml-2">
-						<div style="font-size:12px; font-weight:bold;">팬123</div>
+						<div style="font-size:12px; font-weight:bold;">${notFriend.nickname }</div>
+						<%-- 추후 추가 예정
 						<div style="font-size:10px; color:rgb(217,217,217);">팬145 외 00명이 친구입니다.</div>
+						 --%>
 					</div>
 				</div>
-				<a href="#"><div style="color:rgb(255,122,47); font-size:13px;" class="mr-1">친구 추가</div></a>
+				<a href="#" class="addFriendBtn" data-notFriend-id="${notFriend.id}">
+					<div style="color:rgb(255,122,47); font-size:13px;" class="mr-1">친구 추가</div>
+				</a>
 			</div>
+			</c:forEach>
 		</div>
 	</div>
 </div>
@@ -203,6 +216,12 @@
 					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 				}
 			});
+		});
+		
+		// 친구 추가
+		$('.addFriendBtn').on('click', function(e){
+			let friendId = $(this).data('notFriend-id');
+			alert(friendId);
 		});
 	});
 </script>

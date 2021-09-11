@@ -20,4 +20,8 @@ public interface PostDAO {
 	public List<Post> getPostList();
 	
 	public void postDelete(int postId);
+	
+	public int countPost(int userId);
+	
+	public List<Post> getPostListByUserId(int userId);
 }

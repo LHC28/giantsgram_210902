@@ -77,6 +77,21 @@
 		WHERE
 			`id` = #{userId}
 	</select>
+	<select id="getUserList" resultType="com.giantsgram.user.model.User">
+		SELECT
+			`id`
+			,`loginId`
+			,`password`
+			,`name`
+			,`nickname`
+			,`phoneNumber`
+			,`email`
+			,`imagePath`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`user`
+	</select>
 	<update id="profileChange" parameterType="map">
 		UPDATE `user`
 		SET

@@ -1,6 +1,7 @@
 package com.giantsgram.user.bo;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,5 +46,10 @@ public class UserBO {
 			}
 		}
 		userDAO.profileChange(userId, name, nickname, phoneNumber, email, imagePath);
+	}
+	
+	//전체 유저 리스트 가져오기
+	public List<User> getUserList(){
+		return userDAO.getUserList();
 	}
 }
