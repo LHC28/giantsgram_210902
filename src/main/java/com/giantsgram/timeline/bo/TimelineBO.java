@@ -105,8 +105,19 @@ public class TimelineBO {
 		List<User> userList = userBO.getUserList();
 		// 유저목록을 반복하여 친구목록에 있는지 확인하고 없는 것을 notFriendList에 넣기
 		for(User user:userList) {
-			if(user.getId()!=userId && friendList.contains(user)==false) {
-				notFriendList.add(user);
+			if(user.getId()!=userId) {
+				// 친구목록에 있는 유저를 세는 변수
+				int count = 0;
+				for(Friend friend:friendList) {
+					// 친구목록에 있는 유저가 유저 목록에도 있으면 count에서 1을 더해준다.
+					if(friend.getFriendId()==user.getId()) {
+						count+=1;
+					}
+				}
+				// 0인 경우가 친구목록에 없는 경우이기 때문이다.
+				if(count==0) {
+					notFriendList.add(user);
+				}
 			}
 		}
 		return notFriendList;

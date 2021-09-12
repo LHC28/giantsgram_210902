@@ -113,7 +113,7 @@
 						 --%>
 					</div>
 				</div>
-				<a href="#" class="addFriendBtn" data-notFriend-id="${notFriend.id}">
+				<a href="#" class="addFriendBtn" data-user-id="${notFriend.id }">
 					<div style="color:rgb(255,122,47); font-size:13px;" class="mr-1">친구 추가</div>
 				</a>
 			</div>
@@ -220,8 +220,22 @@
 		
 		// 친구 추가
 		$('.addFriendBtn').on('click', function(e){
-			let friendId = $(this).data('notFriend-id');
-			alert(friendId);
+			let friendId = $(this).data("user-id"); 
+			
+			$.ajax({
+				type:'post'
+				,url:'/friend/friend_add'
+				,data:{'friendId':friendId}
+				,success: function(data){
+					if(data.result=="success"){
+						location.reload();
+					}else{
+						alert("친구 추가에 실패하였습니다. 관리자에게 문의해주세요.")
+					}
+				},error:function(request,status,error){
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				}
+			});
 		});
 	});
 </script>

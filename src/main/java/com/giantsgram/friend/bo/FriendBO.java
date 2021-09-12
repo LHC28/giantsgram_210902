@@ -25,6 +25,9 @@ public class FriendBO {
 		return friendDAO.getFriendList(userId);
 	}
 	
+	public void addFriend(int userId, int friendId){
+		friendDAO.addFriend(userId, friendId);
+	}
 	
 	
 }
