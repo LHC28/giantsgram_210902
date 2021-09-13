@@ -4,7 +4,12 @@
 <div class="pageBox">
 	<div class="pageBoxHeader d-flex justify-content-center">
 		<div class="d-flex pageBoxHeaderPicture">
-			<img src="${user.imagePath}" alt="" width="150px" height="150px" style="border-radius:70%;"> 
+			<c:if test="${not empty user.imagePath }">
+			<img src="${user.imagePath}" alt="" width="150px" height="150px" style="border-radius:70%;">
+			</c:if>
+			<c:if test="${empty user.imagePath }">
+			<img src="/static/images/user.png" alt="" width="150px" height="150px" style="border-radius:70%;">
+			</c:if> 
 		</div>
 		<div class="pageBoxHeaderContent d-flex align-items-center">
 			<div>

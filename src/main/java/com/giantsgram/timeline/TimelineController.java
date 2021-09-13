@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.giantsgram.friend.model.FriendUser;
 import com.giantsgram.post.bo.PostBO;
 import com.giantsgram.timeline.bo.TimelineBO;
 import com.giantsgram.timeline.domain.Timeline;
@@ -45,7 +46,12 @@ public class TimelineController {
 		List<User> notFriendList = new ArrayList<>();
 		notFriendList = timelineBO.getNotFriendList(userId);
 		
+		// 친구 리스트 가져오기
+		List<FriendUser> friendList = new ArrayList<>();
+		friendList = timelineBO.getFriendList(userId);
+		
 		model.addAttribute("timelineList", timelineList);
+		model.addAttribute("friendList", friendList);
 		model.addAttribute("notFriendList", notFriendList);
 		model.addAttribute("view", "timeline/timelineList");
 		return "template/layout";

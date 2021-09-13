@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,6 +34,24 @@ public class FriendRestController {
 		friendBO.addFriend(userId,friendId);
 		result.put("result", "success");
 		
+		return result;
+	}
+	
+	@PostMapping("/friend_delete")
+	public Map<String, String> friendDelete(
+			// 친구 id가져오기
+			@RequestParam("friendId") int friendId
+			,HttpServletRequest request
+			){
+		
+		HttpSession session = request.getSession();
+		// 로그인 중인 유저 아이디 가져오기
+		int userId = (int)session.getAttribute("userId");
+		
+		friendBO.deleteFriend(userId, friendId);
+		
+		Map<String, String> result = new HashMap<>();
+		result.put("result", "success");
 		return result;
 	}
 }

@@ -73,7 +73,6 @@
 				,data:{'loginId':loginId, 'password':password}
 				,success: function(data){
 					if(data.result==true){
-						alert("로그인 완료");
 						location.href="/timeline/post_list_view"
 					}else{
 						alert("로그인 실패. 아이디와 비밀번호를 확인해주세요.");

@@ -30,6 +30,20 @@ public class UserController {
 		return "user/sign_up";
 	}
 	
+	@RequestMapping("/sign_out")
+	public String signOut(
+			HttpServletRequest request
+			) {
+		HttpSession session = request.getSession();
+		session.removeAttribute("loginId");
+		session.removeAttribute("userId");
+		session.removeAttribute("name");
+		session.removeAttribute("nickname");
+		session.removeAttribute("imagePath");
+		
+		return "redirect:/user/sign_in_view";
+	}
+	
 	@RequestMapping("/change_profile_view")
 	public String changeProfileView(
 			Model model

@@ -25,8 +25,14 @@ public class FriendBO {
 		return friendDAO.getFriendList(userId);
 	}
 	
+	// 친구 추가
 	public void addFriend(int userId, int friendId){
 		friendDAO.addFriend(userId, friendId);
+	}
+	
+	// 친구 삭제
+	public void deleteFriend(int userId, int friendId) {
+		friendDAO.deleteFriend(userId, friendId);
 	}
 	
 	

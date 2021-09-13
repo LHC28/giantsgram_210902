@@ -30,12 +30,12 @@
 									<input type="text" id="loginId" class="form-control inputBoxFont1" placeholder="아이디를 입력하세요.">
 									<input type="button" id="duplicatedId" style="width:70px; background-color:rgb(255,122,47); color:white; font-size:8px;" class="btn form-control ml-2" value="중복 확인"> 
 								</div>
-								<input type="password" id="password" class="form-control inputBoxFont mb-2" placeholder="비밀번호를 입력하세요.">
+								<input type="password" id="password" class="form-control inputBoxFont mb-2" placeholder="8자 이상비밀번호를 입력하세요.">
 								<input type="password" id="confirmPassword" class="form-control inputBoxFont mb-2" placeholder="비밀번호를 다시 입력하세요.">
 								<input type="text" id="name" class="form-control inputBoxFont mb-2" placeholder="이름을 입력하세요.">
 								<input type="text" id="phoneNumber" class="form-control inputBoxFont mb-2" placeholder="전화번호를 입력하세요.">
 								<input type="text" id="email" class="form-control inputBoxFont mb-2" placeholder="이메일를 입력하세요.">
-								<div class="warningFont d-none">아이디가 중복됩니다.</div>
+								<div class="warningFont d-none">아이디가 중복되거나 7자 이하입니다.</div>
 								<div class="greenFont d-none">사용 가능한 아이디입니다.</div>
 								<input type="button" class="btn signUpBtn w-100 mt-3" value="회원가입">
 							</div>
@@ -83,11 +83,17 @@
 			if(loginId==''){
 				alert("아이디를 입력해주세요.");
 				return;
+			}else if(loginId.length<8){
+				alert("아이디를 8자 이상 입력해주세요.");
+				return;
 			}
 			
 			let password = $('#password').val();
 			if(password==''){
 				alert("비밀번호를 입력해주세요.");
+				return;
+			}else if(password.length<8){
+				alert("비밀번호를 8자리 이상 눌러주세요.")
 				return;
 			}
 			let confirmPassword = $('#confirmPassword').val();
@@ -108,6 +114,9 @@
 			let phoneNumber = $('#phoneNumber').val();
 			if(phoneNumber==''){
 				alert("전화번호를 입력해주세요.");
+				return;
+			}else if(phoneNumber.length<11){
+				alert("정확한 전화번호를 다시 입력해주세요.");
 				return;
 			}
 			let email = $('#email').val();

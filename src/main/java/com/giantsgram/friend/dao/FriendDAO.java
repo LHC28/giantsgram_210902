@@ -16,4 +16,8 @@ public interface FriendDAO {
 			@Param("userId") int userId
 			,@Param("friendId") int friendId);
 	
+	public void deleteFriend(
+			@Param("userId") int userId
+			,@Param("friendId") int friendId);
+	
 }

@@ -29,5 +29,13 @@
 	 	WHERE
 	 		`userId` = #{userId}
  	</select>
+ 	<delete id="deleteFriend" parameterType="map">
+ 		DELETE
+ 		FROM
+ 			`friend`
+ 		WHERE
+ 			`userId` = #{userId}
+ 			AND `friendId` = #{friendId}
+ 	</delete>
 
  </mapper>

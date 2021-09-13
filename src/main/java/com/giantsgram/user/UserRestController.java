@@ -51,7 +51,7 @@ public class UserRestController {
 			) {
 		Map<String, Boolean> result = new HashMap<>();
 		User user =  userBO.duplicatedId(loginId);
-		if(user==null) {
+		if(user==null && loginId.length()>=8) {
 			result.put("result", true);
 		}else {
 			result.put("result", false);
@@ -79,6 +79,7 @@ public class UserRestController {
 			session.setAttribute("userId", user.getId());
 			session.setAttribute("name", user.getName());
 			session.setAttribute("nickname", user.getNickname());
+			session.setAttribute("imagePath", user.getImagePath());
 			result.put("result", true);
 		// 로그인 실패한 경우
 		}else {

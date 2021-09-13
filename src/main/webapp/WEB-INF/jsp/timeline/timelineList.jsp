@@ -82,18 +82,31 @@
 	<%-- 타임라인 오른쪽 친구창 --%>
 	<div class="friendBox ml-4">
 		<div class="ml-2 mt-2 mb-2">
-			<div class="d-flex">
-				<img src="/static/images/player.jpg" alt="프로필 사진" class="friendboxProfilePicture">
-				<div class="friendBoxPorfile d-flex align-items-center ml-3">
-					<div>
-						<div class="font-weight-bold">팬이에요</div>
-						<div style="color:grey;">가나다</div>
+			<div class="d-flex align-items-center justify-content-between">
+				<div class="d-flex">
+					<c:if test="${not empty imagePath}">
+					<img src="${imagePath }" alt="프로필 사진" class="friendboxProfilePicture">
+					</c:if>
+					<c:if test="${empty imagePath}">
+					<img src="/static/images/user.png" alt="프로필 사진" class="friendboxProfilePicture">
+					</c:if>
+					<div class="friendBoxPorfile d-flex align-items-center ml-3">
+						<div>
+							<div class="font-weight-bold">${nickname}</div>
+							<div style="color:grey;">${name}</div>
+						</div>
 					</div>
 				</div>
+				<a href="/user/sign_out" id="logoutBtn">
+					<div class="mr-2" style="color:red; font-size:10px; font-weight:bold;">로그아웃</div>
+				</a>
 			</div>
+			
 			<div class="d-flex justify-content-between mt-4 mb-2" style="font-size:12px;">
 				<div style="color:rgb(217,217,217); font-size:13px; font-weight:bold;">친구 추천</div>
-				<a href="#"><div style="font-weight:bold;" class="mr-1">모두 보기</div></a>
+				<a href="#" class="allFriendBtn" data-toggle="modal" data-target="#allFriendModal">
+					<div style="font-weight:bold;" class="mr-1">모두 보기</div>
+				</a>
 			</div>
 			<%-- 반복해서 5개 추가 예정 --%>
 			<c:forEach var="notFriend" items="${notFriendList}">
@@ -133,6 +146,45 @@
 				<div class="border-top py-3 text-center">
 					<%-- data-dismiss: 모달창 닫힘 --%>
 					<a href="#" class="cancel d-block" data-dismiss="modal">취소</a> <%-- 클릭할 수 있는 영역을 넓히기 위해 d-block --%>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal" id="allFriendModal" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<%-- Modal 창 안에 내용 넣기 --%>
+			<div class="w-100">
+				<div class="d-flex align-items-center justify-content-center friendModalTitle mb-2">
+					<div>친구</div>
+				</div>
+				
+				<%-- 친구 리스트 가져오기 --%>
+				<c:forEach var="friend" items="${friendList}">
+					<div class="d-flex align-items-center justify-content-between">
+						<div class="d-flex">
+							<div class="ml-2">
+								<c:if test="${friend.user.imagePath ne null}">
+								<img src="${friend.user.imagePath}" alt="친구 프로필 사진" width="30px" height="30px">
+								</c:if>
+								<c:if test="${friend.user.imagePath eq null}">
+								<img src="/static/images/user.png" alt="친구 프로필 사진" width="30px" height="30px">
+								</c:if>
+							</div>
+							<div class="ml-2">
+								<div style="font-size:15px;">${friend.user.nickname}</div>
+								<div style="font-size:10px; color:rgb(217,217,217);">${friend.user.name }</div>
+							</div>
+						</div>
+						<input type="button" class="btn deleteFriendBtn" value="친구 삭제" data-friend-id="${friend.user.id}">
+					</div>
+				</c:forEach>
+				
+				<div class="border-top d-flex align-items-center justify-content-center deleteFriendCancel mt-2">
+					<%-- data-dismiss: 모달창 닫힘 --%>
+					<a href="#" class="cancel" data-dismiss="modal" style="color:red;">취소</a> <%-- 클릭할 수 있는 영역을 넓히기 위해 d-block --%>
 				</div>
 			</div>
 		</div>
@@ -231,6 +283,47 @@
 						location.reload();
 					}else{
 						alert("친구 추가에 실패하였습니다. 관리자에게 문의해주세요.")
+					}
+				},error:function(request,status,error){
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				}
+			});
+		});
+		
+		// 친구 모두 보기
+		$('#moreModal .del-post').on('click', function(e) {
+			e.preventDefault();
+			
+			let postId = $('.more-btn').data('post-id');
+			
+			$.ajax({
+				type:'post'
+				,url:'/post/post_delete'
+				,data: {"postId":postId}
+				,success: function(data) {
+					if (data.result == 'success') {
+						location.reload();
+					}else{
+						alert("자신의 게시물만 삭제 가능합니다.");
+					}
+				},error:function(request,status,error){
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				}
+			});
+		});
+		
+		$('#allFriendModal .deleteFriendBtn').on('click', function(e){
+			let friendId = $(this).data('friend-id');
+			
+			$.ajax({
+				type:'post'
+				,url:'/friend/friend_delete'
+				,data:{'friendId':friendId}
+				,success: function(data){
+					if(data.result=='success'){
+						location.reload();
+					}else{
+						alert("친구삭제에 실패하였습니다. 관리자에게 문의해주세요.");
 					}
 				},error:function(request,status,error){
 					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
