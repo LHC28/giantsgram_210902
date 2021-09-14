@@ -4,7 +4,7 @@ public class Comment {
 
 	private int id;
 	private int userId;
-	private String userName;
+	private String nickname;
 	private int postId;
 	private String content;
 	public int getId() {
@@ -19,11 +19,11 @@ public class Comment {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public String getUserName() {
-		return userName;
+	public String getNickname() {
+		return nickname;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 	public int getPostId() {
 		return postId;

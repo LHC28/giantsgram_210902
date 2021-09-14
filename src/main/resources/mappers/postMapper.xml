@@ -22,6 +22,21 @@
 			,NOW()
 		)
 	</insert>
+	<select id="getPost" parameterType="map" resultType="com.giantsgram.post.model.Post">
+		SELECT
+			`id`
+			,`userId`
+			,`loginId`
+			,`content`
+			,`imagePath`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`post`
+		WHERE
+			`id` = #{postId}
+			AND `userId` = #{userId}
+	</select>
 	<select id="getPostList" resultType="com.giantsgram.post.model.Post">
 		SELECT
 			`id`
@@ -57,11 +72,12 @@
 		ORDER BY `id` DESC
 	</select>
 	
-	<delete id="postDelete">
+	<delete id="postDelete" parameterType="map">
 		DELETE
 		FROM
 			`post`
 		WHERE
 			`id` = #{postId}
+			AND `userId` = #{userId}
 	</delete>
 </mapper>

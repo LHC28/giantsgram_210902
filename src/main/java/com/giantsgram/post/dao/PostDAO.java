@@ -17,9 +17,15 @@ public interface PostDAO {
 			,@Param("imagePath") String imagePath
 			);
 	
+	public Post getPost(
+			@Param("userId") int userId
+			,@Param("postId") int postId);
+	
 	public List<Post> getPostList();
 	
-	public void postDelete(int postId);
+	public void postDelete(
+			@Param("userId") int userId
+			,@Param("postId") int postId);
 	
 	public int countPost(int userId);
 	

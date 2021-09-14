@@ -36,8 +36,15 @@ public class PostBO {
 		return postDAO.getPostList();
 	}
 	
-	public void postDelete(int postId) {
-		postDAO.postDelete(postId);
+	public boolean postDelete(int userId, int postId) {
+		Post post = postDAO.getPost(userId, postId);
+		if(post!=null) {
+			postDAO.postDelete(userId, postId);
+			return true;
+		}else {
+			return false;
+		}
+		
 	}
 	
 	public int countPost(int userId) {

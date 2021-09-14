@@ -21,8 +21,8 @@ public class CommentBO {
 		return commentList;
 	}
 	
-	public void addComment(int userId, String userName, int postId, String content) {
-		commentDAO.addComment(userId, userName, postId, content);
+	public void addComment(int userId, String nickname, int postId, String content) {
+		commentDAO.addComment(userId, nickname, postId, content);
 	}
 	
 	public void deleteComment(int userId, int postId) {

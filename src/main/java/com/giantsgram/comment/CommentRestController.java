@@ -28,8 +28,8 @@ public class CommentRestController {
 			,HttpServletRequest request
 			){
 		HttpSession session = request.getSession();
-		String userName = (String)session.getAttribute("name");
-		commentBO.addComment(userId, userName, postId, content);
+		String nickname = (String)session.getAttribute("nickname");
+		commentBO.addComment(userId, nickname, postId, content);
 		
 		Map<String, String> result = new HashMap<>();
 		result.put("result", "success");

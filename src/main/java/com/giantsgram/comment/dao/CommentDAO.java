@@ -14,7 +14,7 @@ public interface CommentDAO {
 	
 	public void addComment(
 			@Param("userId") int userId
-			,@Param("userName") String userName
+			,@Param("nickname") String nickname
 			,@Param("postId") int postId
 			,@Param("content") String content);
 	

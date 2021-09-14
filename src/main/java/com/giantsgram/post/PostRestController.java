@@ -46,11 +46,22 @@ public class PostRestController {
 	@PostMapping("/post_delete")
 	public Map<String, String> postDelete(
 			@RequestParam("postId") int postId
+			,HttpServletRequest request
 			){
+		HttpSession session = request.getSession();
+		
+		// 로그인한 유저의 id가져오기
+		int userId = (int)session.getAttribute("userId");
+		
 		
 		Map<String, String> result = new HashMap<>();
-		postBO.postDelete(postId);
-		result.put("result", "success");
+		boolean check = postBO.postDelete(userId, postId);
+		if(check==true) {
+			result.put("result", "success");
+		}else {
+			result.put("result", "fail");
+		}
+		
 		return result;
 	}
 }

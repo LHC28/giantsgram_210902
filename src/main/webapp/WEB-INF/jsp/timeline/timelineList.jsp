@@ -16,12 +16,14 @@
 				</c:if>
 				<a href="#"><div class="ml-2">${timeline.user.nickname}</div></a>
 			</div>
+			
 			<%-- modal 창 띄울 버튼 만들 곳 --%>
 			<div class="d-flex align-items-center">
-				<a href="#" class="more-btn" data-toggle="modal" data-target="#moreModal" data-post-id="${timeline.post.id}">
+				<a href="#" class="moreBtn" data-toggle="modal" data-target="#moreModal" data-post-id="${timeline.post.id}">
 					<img src="/static/images/more-icon.png" alt="더보기 버튼" width="30px" height="30px">
 				</a>
 			</div>
+			
 		</div>
 		<c:if test="${not empty timeline.post.imagePath}">
 		<div class="timelinePicture">
@@ -56,10 +58,11 @@
 			<c:forEach var="comment" items="${timeline.commentList }">
 			<div class="d-flex justify-content-between mb-1">
 				<div class="d-flex">
-					<div class="font-weight-bold ml-2">${comment.userName }</div>
+					<div class="font-weight-bold ml-2">${comment.nickname }</div>
 					<div class="ml-3">${comment.content }</div>
 				</div>
-				<c:if test="${userId eq timeline.post.userId}">
+				
+				<c:if test="${userId eq comment.userId}">
 				<div>
 					<a href="#" class="deleteCommentBtn" onclick="return false" data-post-id="${timeline.post.id}">
 						<span class="mr-2" style="font-size:10px; color:red;">댓글 삭제</span>
@@ -68,7 +71,7 @@
 				</c:if>
 			</div>
 			</c:forEach>
-			<div class="dateFont ml-2 mb-2">1일 전</div>
+			<%--<div class="dateFont ml-2 mb-2">1일 전</div> --%>
 		</div>
 		<div class="commentAddBox d-flex align-items-center">
 			<img src="/static/images/comment.svg" alt="번경예정" width="20px" height="20px">
@@ -135,6 +138,7 @@
 	</div>
 </div>
 
+<%-- 게시글에 대한 modal --%>
 <div class="modal" id="moreModal" tabindex="-1" role="dialog">
 	<div class="modal-dialog modal-sm modal-dialog-centered" role="document">
 		<div class="modal-content">
@@ -152,6 +156,7 @@
 	</div>
 </div>
 
+<%-- 친구창에 대한 modal --%>
 <div class="modal" id="allFriendModal" tabindex="-1" role="dialog">
 	<div class="modal-dialog modal-sm modal-dialog-centered" role="document">
 		<div class="modal-content">
@@ -247,12 +252,18 @@
 			});
 		})
 		
+		$('.moreBtn').on('click', function(e){
+			let postId = $(this).data('post-id');
+			$('#moreModal').data('post-id',postId);
+		})
+		
 		// modal 창의 삭제하기 클릭시
-		// 더보기 > 글삭제 클릭
+		// 더보기에서 글삭제 클릭
 		$('#moreModal .del-post').on('click', function(e) {
 			e.preventDefault();
-			
-			let postId = $('.more-btn').data('post-id');
+			let postId = $('#moreModal').data('post-id');
+			// 확인용
+			//alert(postId);
 			
 			$.ajax({
 				type:'post'
@@ -269,6 +280,8 @@
 				}
 			});
 		});
+		
+		
 		
 		// 친구 추가
 		$('.addFriendBtn').on('click', function(e){
@@ -291,11 +304,10 @@
 		});
 		
 		// 친구 모두 보기
-		$('#moreModal .del-post').on('click', function(e) {
+		$('.allFriendBtn .del-post').on('click', function(e) {
 			e.preventDefault();
 			
-			let postId = $('.more-btn').data('post-id');
-			
+			let postId = $('.allFriendBtn').data('post-id');
 			$.ajax({
 				type:'post'
 				,url:'/post/post_delete'
@@ -303,8 +315,10 @@
 				,success: function(data) {
 					if (data.result == 'success') {
 						location.reload();
-					}else{
+					}else if(data.result=='fail'){
 						alert("자신의 게시물만 삭제 가능합니다.");
+					}else{
+						alert("게시물 삭제에 실패하였습니다. 관리자에게 문의해주세요.")
 					}
 				},error:function(request,status,error){
 					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);

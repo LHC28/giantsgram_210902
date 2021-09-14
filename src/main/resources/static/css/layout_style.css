@@ -20,9 +20,9 @@ section a:active {color:black;}
 
 .timelinePicture{width:614px; height:614px;}
 .timelineIconBox {width:614px; height:50px; border: solid 1px rgb(217,217,217);}
-.entireCommentBtn {width:614px; height:10px;}
+.entireCommentBtn {width:614px; height:10px; color:rgb(217,217,217);}
 .dateFont {font-size:10px; color:rgb(217,217,217);}
-.commentAddBox {width:614px;}
+.commentAddBox {width:614px; border-top:solid 1px rgb(217,217,217);}
 .commentBar {width:530px; border:none;}
 .commentAddBtn {width:50px; font-size:13px; background-color:rgb(255,122,47); color:white;}
 
