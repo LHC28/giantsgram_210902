@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="sectionBox d-flex">
-	<%-- 게시글 나열하기 --%>
+	<%-- 게시글 나열 --%>
 	<div>
 	<c:forEach var="timeline" items="${timelineList}">
 	<div class="timelineBox">
