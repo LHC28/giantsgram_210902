@@ -10,7 +10,9 @@ import com.giantsgram.friend.model.Friend;
 @Repository
 public interface FriendDAO {
 
-	public List<Friend> getFriendList(int userId);
+	public List<Friend> getFriendListByUserId(int userId);
+	
+	public List<Friend> getFriendListByFriendId(int friendId);
 	
 	public void addFriend(
 			@Param("userId") int userId

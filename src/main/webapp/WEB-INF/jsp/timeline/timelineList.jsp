@@ -326,9 +326,9 @@
 			});
 		});
 		
+		// 친구 모두 보기에서 친구 삭제를 클릭한 경우
 		$('#allFriendModal .deleteFriendBtn').on('click', function(e){
 			let friendId = $(this).data('friend-id');
-			
 			$.ajax({
 				type:'post'
 				,url:'/friend/friend_delete'

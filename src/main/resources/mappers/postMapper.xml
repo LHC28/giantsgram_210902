@@ -37,6 +37,20 @@
 			`id` = #{postId}
 			AND `userId` = #{userId}
 	</select>
+	<select id="getPostByPostId" resultType="com.giantsgram.post.model.Post">
+		SELECT
+			`id`
+			,`userId`
+			,`loginId`
+			,`content`
+			,`imagePath`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`post`
+		WHERE
+			`id` = #{postId} 
+	</select>
 	<select id="getPostList" resultType="com.giantsgram.post.model.Post">
 		SELECT
 			`id`

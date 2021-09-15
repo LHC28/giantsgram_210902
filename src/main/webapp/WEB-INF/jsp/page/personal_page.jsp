@@ -27,12 +27,31 @@
 	<div></div>
 	<%-- 향후 추가할 수 있을듯... --%>
 	<div class="contentChoiceBox"></div>
-	<div class="d-flex justify-content-between flex-wrap">
+	<div class="d-flex flex-wrap">
 		<c:forEach var="post" items="${postList }">
-		<div class="mb-3">
-			<img src="${post.imagePath}" alt="게시글 사진" width="293px" height="293px">
+		<div class="contentChoicePicture mb-3">
+			<a href="#" class="post" data-post-id=${post.id }>
+				<img src="${post.imagePath}" alt="게시글 사진" width="293px" height="293px"">
+			</a>
 		</div>
 		</c:forEach>
-		
 	</div>
 </div>
+
+<script>
+	$(document).ready(function(){
+		$('.post').on('click',function(e){
+			let postId = $(this).data('post-id');
+			$.ajax({
+				type:'post'
+				,url: '/post/post_view'
+				,data:{'postId':postId}
+				,success: function(data){
+					location.href="/post/post"
+				},error:function(request,status,error){
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				}  
+			});
+		});
+	});
+</script>

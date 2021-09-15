@@ -48,6 +48,7 @@ section a:active {color:black;}
 .pageBoxHeaderContent {width:250px; height:150px;}
 .goProfileBtn {background-color:rgb(255,122,47); color:white; font-size:10px;}
 .contentChoiceBox {height:53px; border-top:solid 1px rgb(217,217,217);}
+.contentChoicePicture{margin-right:30px;}
 .pageBoxContent {height:100px;}
 
 .profileChangeBox {width:700px; height:650px; border: solid 1px rgb(217,217,217);}

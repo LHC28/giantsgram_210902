@@ -3,6 +3,8 @@ package com.giantsgram.timeline.bo;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +37,9 @@ public class TimelineBO {
 	
 	@Autowired
 	private FriendBO friendBO;
+	
+	// 로그 찍기용
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	public List<Timeline> getTimelineList(int userId){ 
 		// 여기서 userId는 로그인 여부를 확인하는 용도로 사용. 여기서 가져오지 않으면 다른 곳에서 가져올 방법이 마땅치 않을듯 싶다.
@@ -77,6 +82,7 @@ public class TimelineBO {
 	}
 	// 친구리스트 가져오기
 	public List<FriendUser> getFriendList(int userId){
+		
 		List<FriendUser> friendList = new ArrayList<>(); 
 		
 		// 친구 목록
@@ -87,7 +93,15 @@ public class TimelineBO {
 			// 친구 목록 가져오기
 			friendUser.setFriend(friend);
 			// 친구의 id로 친구의 user정보 가져오기
-			User user = userBO.getUserById(friend.getFriendId());
+			User user = new User();
+			// 친구DB 중 로그인 된 아이디와 친구DB의 userId가 같은 경우
+			if(friend.getUserId()==userId) {
+				user = userBO.getUserById(friend.getFriendId());
+			// 친구DB 중 로그인 된 아이디와 친구DB의 friendId가 같은 경우
+			}else if(friend.getFriendId()==userId) {
+				user = userBO.getUserById(friend.getUserId());
+			}
+			
 			// 유저정보 넣기
 			friendUser.setUser(user);
 			
@@ -110,7 +124,8 @@ public class TimelineBO {
 				int count = 0;
 				for(Friend friend:friendList) {
 					// 친구목록에 있는 유저가 유저 목록에도 있으면 count에서 1을 더해준다.
-					if(friend.getFriendId()==user.getId()) {
+					// friendId와 userId 모두 없어야 친구추가가 되지 않은 것이기 때문.
+					if(friend.getFriendId()==user.getId() || friend.getUserId()==user.getId()) {
 						count+=1;
 					}
 				}

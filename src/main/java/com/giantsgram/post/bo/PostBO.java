@@ -32,6 +32,10 @@ public class PostBO {
 		postDAO.postCreate(userId, loginId, content, imagePath);
 	}
 	
+	public Post getPostByPostId(int postId) {
+		return postDAO.getPostByPostId(postId);
+	}
+	
 	public List<Post> getPostList(){
 		return postDAO.getPostList();
 	}

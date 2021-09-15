@@ -18,7 +18,7 @@
  			,NOW()
  		)
  	</insert>
- 	<select id="getFriendList" resultType="com.giantsgram.friend.model.Friend">
+ 	<select id="getFriendListByUserId" resultType="com.giantsgram.friend.model.Friend">
  		SELECT
 	 		`userId`
 	 		,`friendId`
@@ -28,6 +28,17 @@
 	 		`friend`
 	 	WHERE
 	 		`userId` = #{userId}
+ 	</select>
+ 	<select id="getFriendListByFriendId" resultType="com.giantsgram.friend.model.Friend">
+ 		SELECT
+	 		`userId`
+	 		,`friendId`
+	 		,`createdAt`
+	 		,`updatedAt`
+	 	FROM
+	 		`friend`
+	 	WHERE
+	 		`friendId` = #{friendId}
  	</select>
  	<delete id="deleteFriend" parameterType="map">
  		DELETE
