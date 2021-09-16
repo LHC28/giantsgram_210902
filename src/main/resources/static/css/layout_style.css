@@ -26,7 +26,7 @@ section a:active {color:black;}
 .commentBar {width:530px; border:none;}
 .commentAddBtn {width:50px; font-size:13px; background-color:rgb(255,122,47); color:white;}
 
-.friendBox {width:321px; height:500px; border: solid 1px rgb(217,217,217);}
+.friendBox {position:fixed; width:321px; height:500px; border: solid 1px rgb(217,217,217);}
 .friendboxProfilePicture {width:60px; height:60px; border-radius:70%;}
 .friendBoxPorfile {height:60px; font-size:12px;}
 .friendboxFriendPicture {width:50px; height:50px; border-radius:70%;}
@@ -34,13 +34,13 @@ section a:active {color:black;}
 .deleteFriendBtn {width:80px; height:30px; background-color:rgb(255,122,47); font-size:12px; color:white;}
 .deleteFriendCancel {height:40px;}
 
-.postBox{width:975px;}
+.postBox{width:940px;}
 .postContentBox {width:335px;}
-.postPicture {width:598px; height:598px; background-color:blue;}
-.postHeader{height:72px; background-color:green;}
-.postContent {height:390px; background-color:grey;}
-.postIcon {height:80px; background-color:red;}
-.postComment {height:56px; background-color:yellow;}
+.postPicture {width:598px; height:598px;}
+.postHeader{width:335px; height:75px; border: solid 1px rgb(217,217,217);}
+.postContent {height:390px; border: solid 1px rgb(217,217,217); border-top:none;}
+.postIcon {height:80px; border: solid 1px rgb(217,217,217);  border-top:none;}
+.postComment {height:56px; border: solid 1px rgb(217,217,217);  border-top:none;}
 
 .pageBox {width:975px;}
 .pageBoxHeader{height:250px;}

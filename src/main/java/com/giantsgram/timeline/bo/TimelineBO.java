@@ -14,6 +14,7 @@ import com.giantsgram.friend.bo.FriendBO;
 import com.giantsgram.friend.model.Friend;
 import com.giantsgram.friend.model.FriendUser;
 import com.giantsgram.like.bo.LikeBO;
+import com.giantsgram.like.model.Like;
 import com.giantsgram.post.bo.PostBO;
 import com.giantsgram.post.model.Post;
 import com.giantsgram.timeline.domain.Timeline;
@@ -40,6 +41,30 @@ public class TimelineBO {
 	
 	// 로그 찍기용
 	Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	public Timeline getTimeline(int postId) {
+		// 게시글 정보 가져오기
+		Post post = postBO.getPostByPostId(postId);
+		
+		Timeline timeline = new Timeline();
+		timeline.setPost(post);
+		
+		// 유저 정보 가져오기
+		User user = userBO.getUserById(post.getUserId());
+		timeline.setUser(user);
+		// 좋아요 갯수 정보 가져오기
+		int like = likeBO.getLikeCount(postId);
+		timeline.setLike(like);
+		// 좋아요 클릭 여부
+		boolean likeClick = likeBO.getLikeClick(user.getId(), postId);
+		timeline.setLikeClick(likeClick);
+		// 댓글 정보 가져오기
+		List<Comment> commentList = commentBO.getCommentList(postId);
+		timeline.setCommentList(commentList);
+		
+		return timeline;
+		
+	}
 	
 	public List<Timeline> getTimelineList(int userId){ 
 		// 여기서 userId는 로그인 여부를 확인하는 용도로 사용. 여기서 가져오지 않으면 다른 곳에서 가져올 방법이 마땅치 않을듯 싶다.

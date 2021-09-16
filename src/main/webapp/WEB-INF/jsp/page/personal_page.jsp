@@ -30,9 +30,16 @@
 	<div class="d-flex flex-wrap">
 		<c:forEach var="post" items="${postList }">
 		<div class="contentChoicePicture mb-3">
-			<a href="#" class="post" data-post-id=${post.id }>
+			<c:if test="${not empty post.imagePath }">
+			<a href="" class="post" data-post-id=${post.id }>
 				<img src="${post.imagePath}" alt="게시글 사진" width="293px" height="293px"">
 			</a>
+			</c:if>
+			<c:if test="${empty post.imagePath }">
+			<a href="" class="post" data-post-id=${post.id }>
+				<img src="/static/images/user.png" alt="게시글 사진" width="293px" height="293px"">
+			</a>
+			</c:if>
 		</div>
 		</c:forEach>
 	</div>
@@ -44,10 +51,14 @@
 			let postId = $(this).data('post-id');
 			$.ajax({
 				type:'post'
-				,url: '/post/post_view'
+				,url: '/post/individual_page'
 				,data:{'postId':postId}
 				,success: function(data){
-					location.href="/post/post"
+					if(data.result=='success'){
+						location.href="/post/post_view?postId="+postId
+					}else{
+						alert("페이지 이동에 실패하였습니다. 관리자에게 문의해주세요.")
+					}
 				},error:function(request,status,error){
 					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 				}  

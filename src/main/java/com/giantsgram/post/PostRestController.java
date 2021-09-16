@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.giantsgram.post.bo.PostBO;
+import com.giantsgram.post.model.Post;
 
 @RestController
 @RequestMapping("/post")
@@ -62,6 +64,20 @@ public class PostRestController {
 			result.put("result", "fail");
 		}
 		
+		return result;
+	}
+	
+	@PostMapping("/individual_page")
+	public Map<String, String> individualPage(
+			@RequestParam("postId") int postId
+			){
+		Map<String, String> result = new HashMap<>();
+		Post post = postBO.getPostByPostId(postId);
+		if(post!=null) {
+			result.put("result", "success");
+		}else {
+			result.put("result", "fail");
+		}
 		return result;
 	}
 }

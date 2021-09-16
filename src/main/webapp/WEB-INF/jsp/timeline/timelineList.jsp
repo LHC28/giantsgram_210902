@@ -27,7 +27,9 @@
 		</div>
 		<c:if test="${not empty timeline.post.imagePath}">
 		<div class="timelinePicture">
+			<a href="/post/post_view?postId=${timeline.post.id}">
 			<img src="${timeline.post.imagePath}" alt="게시글 사진" style="width:614px; height:614px;">
+			</a>
 		</div>
 		</c:if>
 		<div class="timelineIconBox d-flex align-items-center">
@@ -83,57 +85,60 @@
 	</div>
 	
 	<%-- 타임라인 오른쪽 친구창 --%>
-	<div class="friendBox ml-4">
-		<div class="ml-2 mt-2 mb-2">
-			<div class="d-flex align-items-center justify-content-between">
-				<div class="d-flex">
-					<c:if test="${not empty imagePath}">
-					<img src="${imagePath }" alt="프로필 사진" class="friendboxProfilePicture">
-					</c:if>
-					<c:if test="${empty imagePath}">
-					<img src="/static/images/user.png" alt="프로필 사진" class="friendboxProfilePicture">
-					</c:if>
-					<div class="friendBoxPorfile d-flex align-items-center ml-3">
-						<div>
-							<div class="font-weight-bold">${nickname}</div>
-							<div style="color:grey;">${name}</div>
+	<div class="d-flex">
+		<div class="friendBoxPosition"></div>
+		<div class="friendBox ml-4">
+			<div class="ml-2 mt-2 mb-2">
+				<div class="d-flex align-items-center justify-content-between">
+					<div class="d-flex">
+						<c:if test="${not empty imagePath}">
+						<img src="${imagePath}" alt="프로필 사진" class="friendboxProfilePicture">
+						</c:if>
+						<c:if test="${empty imagePath}">
+						<img src="/static/images/user.png" alt="프로필 사진" class="friendboxProfilePicture">
+						</c:if>
+						<div class="friendBoxPorfile d-flex align-items-center ml-3">
+							<div>
+								<div class="font-weight-bold">${nickname}</div>
+								<div style="color:grey;">${name}</div>
+							</div>
 						</div>
 					</div>
+					<a href="/user/sign_out" id="logoutBtn">
+						<div class="mr-2" style="color:red; font-size:10px; font-weight:bold;">로그아웃</div>
+					</a>
 				</div>
-				<a href="/user/sign_out" id="logoutBtn">
-					<div class="mr-2" style="color:red; font-size:10px; font-weight:bold;">로그아웃</div>
-				</a>
-			</div>
-			
-			<div class="d-flex justify-content-between mt-4 mb-2" style="font-size:12px;">
-				<div style="color:rgb(217,217,217); font-size:13px; font-weight:bold;">친구 추천</div>
-				<a href="#" class="allFriendBtn" data-toggle="modal" data-target="#allFriendModal">
-					<div style="font-weight:bold;" class="mr-1">모두 보기</div>
-				</a>
-			</div>
-			<%-- 반복해서 5개 추가 예정 --%>
-			<c:forEach var="notFriend" items="${notFriendList}">
-			<div class="d-flex align-items-center justify-content-between ml-1">
 				
-				<div class="d-flex align-items-center">
-					<c:if test="${notFriend.imagePath ne null }">
-					<img src="${notFriend.imagePath}" alt="프로필 사진" class="friendboxFriendPicture">
-					</c:if>
-					<c:if test="${notFriend.imagePath eq null }">
-					<img src="/static/images/user.png" alt="프로필 사진" class="friendboxFriendPicture">
-					</c:if>
-					<div class="ml-2">
-						<div style="font-size:12px; font-weight:bold;">${notFriend.nickname }</div>
-						<%-- 추후 추가 예정
-						<div style="font-size:10px; color:rgb(217,217,217);">팬145 외 00명이 친구입니다.</div>
-						 --%>
-					</div>
+				<div class="d-flex justify-content-between mt-4 mb-2" style="font-size:12px;">
+					<div style="color:rgb(217,217,217); font-size:13px; font-weight:bold;">친구 추천</div>
+					<a href="#" class="allFriendBtn" data-toggle="modal" data-target="#allFriendModal">
+						<div style="font-weight:bold;" class="mr-1">모두 보기</div>
+					</a>
 				</div>
-				<a href="#" class="addFriendBtn" data-user-id="${notFriend.id }">
-					<div style="color:rgb(255,122,47); font-size:13px;" class="mr-1">친구 추가</div>
-				</a>
+				<%-- 반복해서 5개 추가 예정 --%>
+				<c:forEach var="notFriend" items="${notFriendList}">
+				<div class="d-flex align-items-center justify-content-between ml-1">
+					
+					<div class="d-flex align-items-center">
+						<c:if test="${notFriend.imagePath ne null }">
+						<img src="${notFriend.imagePath}" alt="프로필 사진" class="friendboxFriendPicture">
+						</c:if>
+						<c:if test="${notFriend.imagePath eq null }">
+						<img src="/static/images/user.png" alt="프로필 사진" class="friendboxFriendPicture">
+						</c:if>
+						<div class="ml-2">
+							<div style="font-size:12px; font-weight:bold;">${notFriend.nickname }</div>
+							<%-- 추후 추가 예정
+							<div style="font-size:10px; color:rgb(217,217,217);">팬145 외 00명이 친구입니다.</div>
+							 --%>
+						</div>
+					</div>
+					<a href="#" class="addFriendBtn" data-user-id="${notFriend.id }">
+						<div style="color:rgb(255,122,47); font-size:13px;" class="mr-1">친구 추가</div>
+					</a>
+				</div>
+				</c:forEach>
 			</div>
-			</c:forEach>
 		</div>
 	</div>
 </div>
