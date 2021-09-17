@@ -32,6 +32,7 @@ public class LikeRestController {
 		}
 		
 		Map<String, String> result = new HashMap<>();
+		result.put("result", "success");
 		
 		return result;
 	}

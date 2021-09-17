@@ -16,6 +16,7 @@ import com.giantsgram.friend.bo.FriendBO;
 import com.giantsgram.friend.model.Friend;
 import com.giantsgram.page.bo.MyPageBO;
 import com.giantsgram.post.model.Post;
+import com.giantsgram.user.bo.UserBO;
 import com.giantsgram.user.model.User;
 
 @Controller
@@ -27,6 +28,9 @@ public class MyPageController {
 	
 	@Autowired
 	private FriendBO friendBO;
+	
+	@Autowired
+	private UserBO userBO;
 	
 	@RequestMapping("/my_page_view")
 	public String pageView(
@@ -85,6 +89,20 @@ public class MyPageController {
 		model.addAttribute("postList", postList);
 		model.addAttribute("friendCount", friendCount);
 		model.addAttribute("view", "page/personal_page");
+		return "template/layout";
+	}
+	
+	@RequestMapping("/change_profile_view")
+	public String changeProfileView(
+			Model model
+			,HttpServletRequest request
+			) {
+		HttpSession session = request.getSession();
+		int userId = (int)session.getAttribute("userId");
+		User user = userBO.getUserById(userId);
+		
+		model.addAttribute("user", user);
+		model.addAttribute("view", "user/change_profile");
 		return "template/layout";
 	}
 	

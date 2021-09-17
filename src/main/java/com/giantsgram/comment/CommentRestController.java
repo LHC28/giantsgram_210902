@@ -38,14 +38,14 @@ public class CommentRestController {
 	
 	@RequestMapping("/comment_delete")
 	public Map<String, String> commentDelete(
-			@RequestParam("postId") int postId
+			@RequestParam("commentId") int commentId
 			,HttpServletRequest request
 			){
-		HttpSession session = request.getSession();
-		int userId = (int)session.getAttribute("userId");
-		commentBO.deleteComment(userId, postId);
-		
 		Map<String, String> result = new HashMap<>();
+		
+		HttpSession session = request.getSession();
+		int loginUserId = (int)session.getAttribute("userId");
+		commentBO.deleteComment(commentId);
 		result.put("result", "success");
 		
 		return result;

@@ -44,19 +44,7 @@ public class UserController {
 		return "redirect:/user/sign_in_view";
 	}
 	
-	@RequestMapping("/change_profile_view")
-	public String changeProfileView(
-			Model model
-			,HttpServletRequest request
-			) {
-		HttpSession session = request.getSession();
-		int userId = (int)session.getAttribute("userId");
-		User user = userBO.getUserById(userId);
-		
-		model.addAttribute("user", user);
-		model.addAttribute("view", "user/change_profile");
-		return "template/layout";
-	}
+
 	
 	
 

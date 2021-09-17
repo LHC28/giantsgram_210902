@@ -45,6 +45,7 @@ public class UserBO {
 				e.printStackTrace();
 			}
 		}
+		
 		userDAO.profileChange(userId, name, nickname, phoneNumber, email, imagePath);
 	}
 	

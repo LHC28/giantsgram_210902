@@ -15,7 +15,7 @@
 			<div>
 				<div class="d-flex">
 					<div style="font-size:20px;">${user.nickname }</div>
-					<a href="/user/change_profile_view"><input type="button" class="btn goProfileBtn ml-3" value="프로필 편집"></a>
+					<a href="/page/change_profile_view"><input type="button" class="btn goProfileBtn ml-3" value="프로필 편집"></a>
 				</div>
 				<div class="d-flex mt-3" style="font-size:15px;">
 					<div>게시물 <a href="#" class="mr-3">${postCount}</a></div>

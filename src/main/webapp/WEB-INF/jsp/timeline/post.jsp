@@ -22,8 +22,13 @@
 					<img src="/static/images/user.png" width="50px" height="50px" style="border-radius:70%;">
 					</c:if>
 				</div>
-				
+				<%-- 로그인한 유저의 id와 게시글의 id가 같은 경우 나의 페이지로 --%>
+				<c:if test="${userId eq timeline.post.userId }">
 				<a href="/page/my_page_view"><div class="ml-2">${timeline.user.nickname }</div></a>
+				</c:if>
+				<c:if test="${userId ne timeline.post.userId }">
+				<a href="/page/user_page_view?userId=${timeline.post.userId}"><div class="ml-2">${timeline.user.nickname }</div></a>
+				</c:if>
 			</div>
 			<%-- 게시글 modal 창 띄우기 --%>
 			<div class="d-flex align-items-center">
@@ -42,15 +47,26 @@
 				<img src="/static/images/user.png" width="50px" height="50px" style="border-radius:70%;">
 				</c:if>
 				<div class="ml-2">
-					<a href="#" class="font-weight-bold">${timeline.user.nickname}</a>
+					<c:if test="${userId eq timeline.post.userId }">
+					<a href="/page/my_page_view" class="font-weight-bold">${timeline.user.nickname}</a>
+					</c:if>
+					<c:if test="${userId ne timeline.post.userId }">
+					<a href="/page/user_page_view?userId=${timeline.post.userId}" class="font-weight-bold">${timeline.user.nickname}</a>
+					</c:if>
 				</div>
 			</div>
 			<div class="mt-2"> ${timeline.post.content}</div>
 			<div class="mt-5"></div>
+			<%-- 댓글이 보이는 부분 --%>
 			<c:forEach var="comment" items="${timeline.commentList}">
-			<div class="d-flex mt-2">
-				<a href="/page/user_page_view?userId=${comment.userId}"><div class="font-weight-bold">${timeline.user.nickname}</div></a>
-				<div class="ml-2">${comment.content}</div>
+			<div class="d-flex justify-content-between align-items-center mt-2">
+				<div class="d-flex">
+					<a href="/page/user_page_view?userId=${comment.userId}"><div class="font-weight-bold">${comment.nickname}</div></a>
+					<div class="ml-2">${comment.content}</div>
+				</div>
+				<c:if test="${comment.userId eq userId }">
+				<a href="" class="commentDeleteBtn" data-post-id="${comment.postId}" data-comment-id="${comment.id}" data-user-id="${comment.userId }"><div style="color:red; font-size:10px;">댓글 삭제</div></a>
+				</c:if>
 			</div>
 			</c:forEach>
 		</div>
@@ -65,17 +81,19 @@
 					<img src="/static/images/heart-icon2.png" width="25px" height="25px" class="mr-2">
 					</c:if>
 				</a>
-				<%-- 댓글 버튼 --%>
 				<img src="/static/images/comment.svg" width="25px" height="25px" class="mr-2">
 				<div class="font-weight-bold">좋아요 ${timeline.like}개</div>
 			</div>
 			<%-- 향후 추가 예정 --%>
 			<%--<div class="font-weight-bold mt-2" style="font-size:15px; color:rgb(217,217,217);">1시간 전</div> --%>
 		</div>
+		<%-- 댓글 버튼 --%>
 		<div class="postComment p-2 d-flex align-items-center">
 			<img src="/static/images/comment.svg" width="25px" height="25px">
-			<input type="text" class="form-control" placeholder="댓글 달기..." style="border:none;">
-			<input type="button" class="btn" value="게시" style="background-color:rgb(255,122,47); color:white;">
+			<input type="text" class="form-control comment" placeholder="댓글 달기..." style="border:none;">
+			<input type="button" class="btn commentBtn"
+				value="게시" style="background-color:rgb(255,122,47); color:white;"
+				data-user-id="${userId}" data-post-id="${timeline.post.id}">
 		</div>
 	</div>
 </div>
@@ -131,5 +149,71 @@
 				}
 			});
 		});
+		
+		// 좋아요 클릭시
+		$('.likeBtn').on('click', function(e){
+			let userId = $(this).data('user-id');
+			let postId = $(this).data('post-id');
+			
+			$.ajax({
+				type:'post'
+				,url:'/like/like_click'
+				,data: {'userId':userId, 'postId':postId}
+				,success: function(data){
+					if(data.result=='success'){
+						location.reload();
+					}else{
+						alert("좋아요 버튼 클릭에 문제가 발생하였습니다. 관리자에게 문의해주세요.")
+					}
+				},error:function(request,status,error){
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				}
+			});
+		});
+		
+		// 댓글 달기
+		$('.commentBtn').on('click', function(e){
+			// 유저와 게시글의 id가져오기
+			let userId = $(this).data('user-id');
+			let postId = $(this).data('post-id');
+			// 댓글 내용 가져오기
+			let content = $('.comment').val();
+			
+			$.ajax({
+				type: 'post'
+				,url: '/comment/comment_create'
+				,data: {'userId':userId, 'postId':postId, 'content':content}
+				,success: function(data){
+					if(data.result=='success'){
+						location.reload();
+					}else{
+						// 향후 실패했을시 필요하면 활용.
+						alert("댓글 달기에 실패하였습니다. 관리자에게 문의해주세요.");
+					}
+				},error:function(request,status,error){
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				}
+			});
+		});
+		
+		// 댓글 삭제
+		$('.commentDeleteBtn').on('click',function(e){
+			let postId = $(this).data('post-id');
+			let commentId = $(this).data('commentId');
+			
+			$.ajax({
+				type: 'post'
+				,url: '/comment/comment_delete'
+				,data: {'commentId':commentId}
+				,success: function(data){
+					if(data.result=='success'){
+						location.reload();
+					}
+				},error:function(request,status,error){
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				}
+			});
+		});
+		
 	});
 </script>

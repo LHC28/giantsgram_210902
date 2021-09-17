@@ -66,7 +66,7 @@
 				
 				<c:if test="${userId eq comment.userId}">
 				<div>
-					<a href="#" class="deleteCommentBtn" onclick="return false" data-post-id="${timeline.post.id}">
+					<a href="#" class="deleteCommentBtn" onclick="return false" data-comment-id="${comment.id}">
 						<span class="mr-2" style="font-size:10px; color:red;">댓글 삭제</span>
 					</a>
 				</div>
@@ -117,8 +117,7 @@
 				</div>
 				<%-- 반복해서 5개 추가 예정 --%>
 				<c:forEach var="notFriend" items="${notFriendList}">
-				<div class="d-flex align-items-center justify-content-between ml-1">
-					
+				<div class="d-flex align-items-center justify-content-between ml-1 mb-2">
 					<div class="d-flex align-items-center">
 						<c:if test="${notFriend.imagePath ne null }">
 						<img src="${notFriend.imagePath}" alt="프로필 사진" class="friendboxFriendPicture">
@@ -127,7 +126,10 @@
 						<img src="/static/images/user.png" alt="프로필 사진" class="friendboxFriendPicture">
 						</c:if>
 						<div class="ml-2">
-							<div style="font-size:12px; font-weight:bold;">${notFriend.nickname }</div>
+						<%-- /page/user_page_view?userId=${notFriend.user.id } --%>
+							<a href="/page/user_page_view?userId=${notFriend.id }">
+								<div style="font-size:12px; font-weight:bold;">${notFriend.nickname }</div>
+							</a>
 							<%-- 추후 추가 예정
 							<div style="font-size:10px; color:rgb(217,217,217);">팬145 외 00명이 친구입니다.</div>
 							 --%>
@@ -224,11 +226,11 @@
 		// 댓글 삭제 기능
 		$('.deleteCommentBtn').on('click', function(e){
 			let postId = $(this).data("post-id");
-			
+			let commentId = $(this).data("commentId");
 			$.ajax({
 				type:'post'
 				,url:'/comment/comment_delete'
-				,data:{'postId':postId}
+				,data:{'commentId':commentId}
 				,success: function(data){
 					if(data.result=='success'){
 						location.reload();

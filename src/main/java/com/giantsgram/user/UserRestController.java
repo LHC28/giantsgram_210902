@@ -102,6 +102,17 @@ public class UserRestController {
 		String loginId = (String)session.getAttribute("loginId");
 		userBO.profileChange(userId, loginId, name, nickname, phoneNumber, email, file);
 		
+		// 변경된 user 정보 가져오기
+		User user = userBO.getUserById(userId);
+		
+		// 세션 변경
+		// name, nickname, phoneNumber, email,imagePath (imagePath는 아직 file로 BO에서 변경되므로 BO에서)
+		session.setAttribute("name", user.getName());
+		session.setAttribute("nickname", user.getNickname());
+		session.setAttribute("phoneNumber", user.getPhoneNumber());
+		session.setAttribute("email", user.getEmail());
+		session.setAttribute("imagePath", user.getImagePath());
+		
 		Map<String, String> result = new HashMap<>();
 		result.put("result", "success");
 		return result;
