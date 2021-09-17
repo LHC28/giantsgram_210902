@@ -127,7 +127,7 @@
 						</c:if>
 						<div class="ml-2">
 						<%-- /page/user_page_view?userId=${notFriend.user.id } --%>
-							<a href="/page/user_page_view?userId=${notFriend.id }">
+							<a href="/page/user_page_view?userId=${notFriend.id}">
 								<div style="font-size:12px; font-weight:bold;">${notFriend.nickname }</div>
 							</a>
 							<%-- 추후 추가 예정
