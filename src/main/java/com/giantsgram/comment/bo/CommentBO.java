@@ -17,12 +17,12 @@ public class CommentBO {
 
 	public List<Comment> getCommentList(int postId){
 		List<Comment> commentList = new ArrayList<>();
-		commentList = commentDAO.getCommentList(postId);
+		commentList = commentDAO.selectCommentListByPostId(postId);
 		return commentList;
 	}
 	
 	public void addComment(int userId, String nickname, int postId, String content) {
-		commentDAO.addComment(userId, nickname, postId, content);
+		commentDAO.insertComment(userId, nickname, postId, content);
 	}
 	
 	public void deleteComment(int commentId) {

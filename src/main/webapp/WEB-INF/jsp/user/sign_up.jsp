@@ -28,7 +28,7 @@
 							<div class="mt-2">
 								<div class="d-flex mb-2">
 									<input type="text" id="loginId" class="form-control inputBoxFont1" placeholder="아이디를 입력하세요.">
-									<input type="button" id="duplicatedId" style="width:70px; background-color:rgb(255,122,47); color:white; font-size:8px;" class="btn form-control ml-2" value="중복 확인"> 
+									<input type="button" id="duplicatedId" class="btn form-control ml-2" value="중복 확인"> 
 								</div>
 								<input type="password" id="password" class="form-control inputBoxFont mb-2" placeholder="8자 이상비밀번호를 입력하세요.">
 								<input type="password" id="confirmPassword" class="form-control inputBoxFont mb-2" placeholder="비밀번호를 다시 입력하세요.">

@@ -28,7 +28,7 @@
 		<c:if test="${not empty timeline.post.imagePath}">
 		<div class="timelinePicture">
 			<a href="/post/post_view?postId=${timeline.post.id}">
-			<img src="${timeline.post.imagePath}" alt="게시글 사진" style="width:614px; height:614px;">
+			<img src="${timeline.post.imagePath}" alt="게시글 사진" class="timelinePicture">
 			</a>
 		</div>
 		</c:if>
@@ -54,8 +54,13 @@
 				<div class="ml-3">${timeline.post.content }</div>
 			</div>
 			<%-- 댓글 갯수 --%>
+			<%-- 댓글이 있는 경우 갯수 표시 --%>
 			<c:if test="${timeline.commentList.size() ne 0 }">
 			<div class="entireCommentBtn mt-1 ml-2 mb-3">${timeline.commentList.size()}개 댓글</div>
+			</c:if>
+			<%-- 댓글이 없는 경우 갯수 표시 --%>
+			<c:if test="${timeline.commentList.size() eq 0 }">
+			<div class="entireCommentBtn mt-1 ml-2 mb-3">0개 댓글</div>
 			</c:if>
 			<c:forEach var="comment" items="${timeline.commentList }">
 			<div class="d-flex justify-content-between mb-1">
@@ -67,7 +72,7 @@
 				<c:if test="${userId eq comment.userId}">
 				<div>
 					<a href="#" class="deleteCommentBtn" onclick="return false" data-comment-id="${comment.id}">
-						<span class="mr-2" style="font-size:10px; color:red;">댓글 삭제</span>
+						<span class="mr-2 commentDeleteFont">댓글 삭제</span>
 					</a>
 				</div>
 				</c:if>
@@ -76,7 +81,7 @@
 			<%--<div class="dateFont ml-2 mb-2">1일 전</div> --%>
 		</div>
 		<div class="commentAddBox d-flex align-items-center">
-			<img src="/static/images/comment.svg" alt="번경예정" width="20px" height="20px">
+			<img src="/static/images/comment.svg" alt="번경예정" width="20px" height="20px" class="ml-1">
 			<input type="text" class="form-control commentBar ml-1" placeholder="댓글 달기...">
 			<input type="button" class="btn commentAddBtn ml-2" value="게시" data-user-id="${userId }" data-post-id="${timeline.post.id }" >
 		</div>
@@ -100,19 +105,19 @@
 						<div class="friendBoxPorfile d-flex align-items-center ml-3">
 							<div>
 								<div class="font-weight-bold">${nickname}</div>
-								<div style="color:grey;">${name}</div>
+								<div class="friendBoxPorfileName">${name}</div>
 							</div>
 						</div>
 					</div>
 					<a href="/user/sign_out" id="logoutBtn">
-						<div class="mr-2" style="color:red; font-size:10px; font-weight:bold;">로그아웃</div>
+						<div class="mr-2 logoutBtnFont">로그아웃</div>
 					</a>
 				</div>
 				
-				<div class="d-flex justify-content-between mt-4 mb-2" style="font-size:12px;">
-					<div style="color:rgb(217,217,217); font-size:13px; font-weight:bold;">친구 추천</div>
+				<div class="d-flex justify-content-between mt-4 mb-2 allFriendBtnHeader">
+					<div class="allFriendFont">친구 추천</div>
 					<a href="#" class="allFriendBtn" data-toggle="modal" data-target="#allFriendModal">
-						<div style="font-weight:bold;" class="mr-1">모두 보기</div>
+						<div class="font-weight-bold mr-1">모두 보기</div>
 					</a>
 				</div>
 				<%-- 반복해서 5개 추가 예정 --%>
@@ -126,9 +131,9 @@
 						<img src="/static/images/user.png" alt="프로필 사진" class="friendboxFriendPicture">
 						</c:if>
 						<div class="ml-2">
-						<%-- /page/user_page_view?userId=${notFriend.user.id } --%>
+						<%-- /page/user_page_view?userId=${notFriend.user.id } get방식으로 하기 --%>
 							<a href="/page/user_page_view?userId=${notFriend.id}">
-								<div style="font-size:12px; font-weight:bold;">${notFriend.nickname }</div>
+								<div class="notFriendNicknameFont">${notFriend.nickname }</div>
 							</a>
 							<%-- 추후 추가 예정
 							<div style="font-size:10px; color:rgb(217,217,217);">팬145 외 00명이 친구입니다.</div>
@@ -136,7 +141,7 @@
 						</div>
 					</div>
 					<a href="#" class="addFriendBtn" data-user-id="${notFriend.id }">
-						<div style="color:rgb(255,122,47); font-size:13px;" class="mr-1">친구 추가</div>
+						<div class="mr-1 addFriendBtnFont">친구 추가</div>
 					</a>
 				</div>
 				</c:forEach>
@@ -186,8 +191,8 @@
 								</c:if>
 							</div>
 							<div class="ml-2">
-								<div style="font-size:15px;">${friend.user.nickname}</div>
-								<div style="font-size:10px; color:rgb(217,217,217);">${friend.user.name }</div>
+								<div class="friendNickname">${friend.user.nickname}</div>
+								<div class="friendUserName">${friend.user.name }</div>
 							</div>
 						</div>
 						<input type="button" class="btn deleteFriendBtn" value="친구 삭제" data-friend-id="${friend.user.id}">
@@ -196,7 +201,7 @@
 				
 				<div class="border-top d-flex align-items-center justify-content-center deleteFriendCancel mt-2">
 					<%-- data-dismiss: 모달창 닫힘 --%>
-					<a href="#" class="cancel" data-dismiss="modal" style="color:red;">취소</a> <%-- 클릭할 수 있는 영역을 넓히기 위해 d-block --%>
+					<a href="#" class="cancel" data-dismiss="modal"><span class="friendModalCancelFont">취소</span></a> <%-- 클릭할 수 있는 영역을 넓히기 위해 d-block --%>
 				</div>
 			</div>
 		</div>
@@ -209,8 +214,11 @@
 		// 댓글 추가 기능
 		$('.commentAddBtn').on('click', function(e){
 			let userId = $(this).data('user-id');
+			// 게시글 id
 			let postId = $(this).data('post-id');
+			// 댓글 내용
 			let content = $('.commentBar').val();
+			
 			$.ajax({
 				type:'post'
 				,url:'/comment/comment_create'

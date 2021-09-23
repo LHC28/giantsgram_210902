@@ -29,7 +29,16 @@ section a:active {color:black;}
 .friendBox {position:fixed; width:321px; height:500px; border: solid 1px rgb(217,217,217);}
 .friendboxProfilePicture {width:60px; height:60px; border-radius:70%;}
 .friendBoxPorfile {height:60px; font-size:12px;}
+.friendBoxPorfileName {color:grey;}
+.logoutBtnFont {color:red; font-size:10px; font-weight:bold;}
+.allFriendBtnHeader {font-size:12px;}
+.allFriendFont{color:rgb(217,217,217); font-size:13px; font-weight:bold;}
 .friendboxFriendPicture {width:50px; height:50px; border-radius:70%;}
+.notFriendNicknameFont {font-size:12px; font-weight:bold;}
+.addFriendBtnFont {color:rgb(255,122,47); font-size:13px;}
+.friendNickname {font-size:15px;}
+.friendUserName {font-size:10px; color:rgb(217,217,217);}
+.friendModalCancelFont {color:red;}
 .friendModalTitle {height:40px; border-bottom:solid 1px rgb(217,217,217)}
 .deleteFriendBtn {width:80px; height:30px; background-color:rgb(255,122,47); font-size:12px; color:white;}
 .deleteFriendCancel {height:40px;}
@@ -38,29 +47,39 @@ section a:active {color:black;}
 .postContentBox {width:335px;}
 .postPicture {width:598px; height:598px;}
 .postHeader{width:335px; height:75px; border: solid 1px rgb(217,217,217);}
+.postHeaderImage {border-radius:70%;}
 .postContent {height:390px; border: solid 1px rgb(217,217,217); border-top:none;}
+.postContentImage {border-radius:70%;}
+.commentDeleteFont {color:red; font-size:10px;}
 .postIcon {height:80px; border: solid 1px rgb(217,217,217);  border-top:none;}
 .postComment {height:56px; border: solid 1px rgb(217,217,217);  border-top:none;}
+.postCommentBtn {background-color:rgb(255,122,47); color:white;}
+.postCommentBox {border:none;}
 
 .pageBox {width:975px;}
 .pageBoxHeader{height:250px;}
 .pageBoxHeaderPicture {width:250px; height:250px;}
+.pageBoxHeaderPictureImage {border-radius:70%;}
 .pageBoxHeaderContent {width:250px; height:150px;}
+.pageBoxHeaderContentNickname {font-size:20px;}
+.pageBoxHeaderContentFont {font-size:15px;}
 .goProfileBtn {background-color:rgb(255,122,47); color:white; font-size:10px;}
 .contentChoiceBox {height:53px; border-top:solid 1px rgb(217,217,217);}
 .contentChoicePicture{margin-right:30px;}
 .pageBoxContent {height:100px;}
 
 .profileChangeBox {width:700px; height:650px; border: solid 1px rgb(217,217,217);}
-.profileChangeBoxTitle {height:80px;}
+.profileChangeBoxTitle {height:80px; color:rgb(255,122,47);}
 .profileChangeContentBox {width:600px; height:500px;}
 .profileChangeContentBoxPart {width:300px; height:70px;}
 .profileChangeContentBoxPartName {width:194px; height:32px;}
 .profileChangeContentBoxPartContent {width:355px; height:32px; font-size:15px;}
 .profileChangeContentBoxPartPicture {width:300px; height:140px; border: solid 1px rgb(217,217,217);}
+.profileChangeContentBoxPartImage {border-radius:70%;}
 .profileChangeBtn {font-size:10px; color:white; background-color:rgb(255,122,47);}
-
+.profilePictureChangeFont {color:rgb(255,122,47); font-size:15px;}
 .uploadBox {width:500px; height:400px;}
 .uploadBoxTitle{height:70px; border: 1px solid rgb(217,217,217); border-bottom:none;}
 .uploadBoxContent {height:330px; border: 1px solid rgb(217,217,217);}
+.uploadBoxContentTextarea {border:none; font-size:20px;}
 .postBtn {background-color:rgb(255,122,47); color:white;}

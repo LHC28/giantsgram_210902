@@ -21,7 +21,7 @@ public class UserBO {
 	private FileManagerService fileManagerService;
 	
 	public void addUser(String loginId, String password, String name, String phoneNumber, String email) {
-		userDAO.addUser(loginId, password, name, phoneNumber, email);
+		userDAO.insertUser(loginId, password, name, phoneNumber, email);
 	}
 	
 	public User duplicatedId(String loginId) {
@@ -46,11 +46,11 @@ public class UserBO {
 			}
 		}
 		
-		userDAO.profileChange(userId, name, nickname, phoneNumber, email, imagePath);
+		userDAO.updateProfile(userId, name, nickname, phoneNumber, email, imagePath);
 	}
 	
 	//전체 유저 리스트 가져오기
 	public List<User> getUserList(){
-		return userDAO.getUserList();
+		return userDAO.selectUserList();
 	}
 }

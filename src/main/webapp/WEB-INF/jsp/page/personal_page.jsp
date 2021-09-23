@@ -5,19 +5,19 @@
 	<div class="pageBoxHeader d-flex justify-content-center">
 		<div class="d-flex pageBoxHeaderPicture">
 			<c:if test="${not empty user.imagePath }">
-			<img src="${user.imagePath}" alt="" width="150px" height="150px" style="border-radius:70%;">
+			<img src="${user.imagePath}" alt="" width="150px" height="150px" class="pageBoxHeaderPictureImage">
 			</c:if>
 			<c:if test="${empty user.imagePath }">
-			<img src="/static/images/user.png" alt="" width="150px" height="150px" style="border-radius:70%;">
+			<img src="/static/images/user.png" alt="" width="150px" height="150px" class="pageBoxHeaderPictureImage">
 			</c:if> 
 		</div>
 		<div class="pageBoxHeaderContent d-flex align-items-center">
 			<div>
 				<div class="d-flex">
-					<div style="font-size:20px;">${user.nickname }</div>
+					<div class="pageBoxHeaderContentNickname">${user.nickname }</div>
 					<a href="/page/change_profile_view"><input type="button" class="btn goProfileBtn ml-3" value="프로필 편집"></a>
 				</div>
-				<div class="d-flex mt-3" style="font-size:15px;">
+				<div class="d-flex mt-3" class="pageBoxHeaderContentFont">
 					<div>게시물 <a href="#" class="mr-3">${postCount}</a></div>
 					<div>친구 <a href="#">${friendCount}</a></div>
 				</div>

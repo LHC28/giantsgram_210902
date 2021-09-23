@@ -14,12 +14,12 @@
 	<div class="postContentBox">
 		<div class="postHeader d-flex justify-content-between">
 			<div class="d-flex align-items-center p-2">
-				<div>
+				<div class="borderRadius70">
 					<c:if test="${not empty timeline.user.imagePath}">
-					<img src="${timeline.user.imagePath }" width="50px" height="50px" style="border-radius:70%;">
+					<img src="${timeline.user.imagePath }" width="50px" height="50px" class="postHeaderImage">
 					</c:if>
 					<c:if test="${empty timeline.user.imagePath}">
-					<img src="/static/images/user.png" width="50px" height="50px" style="border-radius:70%;">
+					<img src="/static/images/user.png" width="50px" height="50px" class="postHeaderImage">
 					</c:if>
 				</div>
 				<%-- 로그인한 유저의 id와 게시글의 id가 같은 경우 나의 페이지로 --%>
@@ -41,10 +41,10 @@
 		<div class="postContent p-2">
 			<div class="d-flex align-items-center">
 				<c:if test="${not empty timeline.user.imagePath}">
-				<img src="${timeline.user.imagePath }" width="50px" height="50px" style="border-radius:70%;">
+				<img src="${timeline.user.imagePath }" width="50px" height="50px" class="postContentImage">
 				</c:if>
 				<c:if test="${empty timeline.user.imagePath}">
-				<img src="/static/images/user.png" width="50px" height="50px" style="border-radius:70%;">
+				<img src="/static/images/user.png" width="50px" height="50px" class="postContentImage">
 				</c:if>
 				<div class="ml-2">
 					<c:if test="${userId eq timeline.post.userId }">
@@ -65,7 +65,7 @@
 					<div class="ml-2">${comment.content}</div>
 				</div>
 				<c:if test="${comment.userId eq userId }">
-				<a href="" class="commentDeleteBtn" data-post-id="${comment.postId}" data-comment-id="${comment.id}" data-user-id="${comment.userId }"><div style="color:red; font-size:10px;">댓글 삭제</div></a>
+				<a href="" class="commentDeleteBtn" data-post-id="${comment.postId}" data-comment-id="${comment.id}" data-user-id="${comment.userId }"><div class="commentDeleteFont">댓글 삭제</div></a>
 				</c:if>
 			</div>
 			</c:forEach>
@@ -90,10 +90,9 @@
 		<%-- 댓글 버튼 --%>
 		<div class="postComment p-2 d-flex align-items-center">
 			<img src="/static/images/comment.svg" width="25px" height="25px">
-			<input type="text" class="form-control comment" placeholder="댓글 달기..." style="border:none;">
-			<input type="button" class="btn commentBtn"
-				value="게시" style="background-color:rgb(255,122,47); color:white;"
-				data-user-id="${userId}" data-post-id="${timeline.post.id}">
+			<input type="text" class="form-control postCommentBox" placeholder="댓글 달기...">
+			<input type="button" class="btn postCommentBtn"
+				value="게시" data-user-id="${userId}" data-post-id="${timeline.post.id}">
 		</div>
 	</div>
 </div>
@@ -172,12 +171,12 @@
 		});
 		
 		// 댓글 달기
-		$('.commentBtn').on('click', function(e){
+		$('.postCommentBtn').on('click', function(e){
 			// 유저와 게시글의 id가져오기
 			let userId = $(this).data('user-id');
 			let postId = $(this).data('post-id');
 			// 댓글 내용 가져오기
-			let content = $('.comment').val();
+			let content = $('.postCommentBox').val();
 			
 			$.ajax({
 				type: 'post'

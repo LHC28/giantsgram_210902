@@ -7,7 +7,7 @@
 	</div>
 	<div class="uploadBoxContent d-flex justify-content-center align-items-center">
 		<div>
-			<textarea cols="50" rows="3" id="content" class="form-control" style="border:none; font-size:20px;" placeholder="내용을 입력해주세요."></textarea>
+			<textarea cols="50" rows="3" id="content" class="form-control uploadBoxContentTextarea" placeholder="내용을 입력해주세요."></textarea>
 			<input type="file" id="file" class="d-none" accept=".gif, .jpg, .png, .jpeg"><br>
 			<div class="d-flex">
 				<a href="#" id="fileUploadBtn"><img width="35" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-512.png"></a>
@@ -40,10 +40,13 @@
 			$('#fileName').text(name); // 이미지 파일 등록시 div안에 name을 가져온다.
 		})
 		
+		<%-- 코드 변경으로 필요 없어짐... 
 		// 게시글 입력칸 클릭시 글자 입력해달라는 문구 없애기
 		$('#content').on('click',function(e){
 			$('#content').val('');
 		});
+		--%>
+		
 		// 게시글 업로드
 		$('.postBtn').on('click',function(e){
 			// 유효성 검사

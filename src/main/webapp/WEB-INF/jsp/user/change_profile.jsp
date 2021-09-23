@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <div class="profileChangeBox">
 	<div class="profileChangeBoxTitle d-flex align-items-end justify-content-center">
-		<h2 style="color:rgb(255,122,47);">프로필 변경</h2>
+		<h2>프로필 변경</h2>
 	</div>
 	<div class="d-flex justify-content-center">
 		<div class="profileChangeContentBox d-flex justify-content-center">
@@ -35,14 +35,14 @@
 				</div>
 				<div class="profileChangeContentBoxPartPicture d-flex align-items-center mt-3">
 					<c:if test="${user.imagePath eq null }">
-					<img src="/static/images/user.png" alt="" width="100px" height="100px" style="border-radius:70%;"" class="ml-2 nonPreview">
-					<img src="" alt="" width="100px" height="100px" style="border-radius:70%;" class="ml-2 preview d-none">
+					<img src="/static/images/user.png" alt="" width="100px" height="100px" class="ml-2 profileChangeContentBoxPartImage nonPreview">
+					<img src="" alt="" width="100px" height="100px" class="ml-2 profileChangeContentBoxPartImage preview d-none">
 					</c:if>
 					<c:if test="${user.imagePath ne null }">
-					<img src="${user.imagePath }" alt="" width="100px" height="100px" style="border-radius:70%;" class="ml-2 nonPreview">
-					<img src="" alt="" width="100px" height="100px" style="border-radius:70%;" class="ml-2 preview d-none">
+					<img src="${user.imagePath }" alt="" width="100px" height="100px" class="ml-2 profileChangeContentBoxPartImage nonPreview">
+					<img src="" alt="" width="100px" height="100px" class="ml-2 profileChangeContentBoxPartImage preview d-none">
 					</c:if>
-					<a href="#" onclick="return false" class="profilePictureChange"><div class="ml-4" style="color:rgb(255,122,47); font-size:15px;">프로필 사진 변경</div></a>
+					<a href="#" onclick="return false" class="profilePictureChange"><div class="profilePictureChangeFont ml-4">프로필 사진 변경</div></a>
 					<input type="file" id="file" class="btn profilePictureInput d-none" accept=".gif, .jpg, .png, .jpeg">
 				</div>
 				<div class="d-flex justify-content-center">

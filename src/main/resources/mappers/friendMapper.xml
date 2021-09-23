@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="com.giantsgram.friend.dao.FriendDAO">
- 	<insert id="addFriend" parameterType="map">
+ 	<insert id="insertFriend" parameterType="map">
  		INSERT INTO `friend`
  		(
  			`userId`
@@ -18,7 +18,7 @@
  			,NOW()
  		)
  	</insert>
- 	<select id="getFriendListByUserId" resultType="com.giantsgram.friend.model.Friend">
+ 	<select id="selectFriendListByUserId" resultType="com.giantsgram.friend.model.Friend">
  		SELECT
 	 		`userId`
 	 		,`friendId`
@@ -29,7 +29,7 @@
 	 	WHERE
 	 		`userId` = #{userId}
  	</select>
- 	<select id="getFriendListByFriendId" resultType="com.giantsgram.friend.model.Friend">
+ 	<select id="selectFriendListByFriendId" resultType="com.giantsgram.friend.model.Friend">
  		SELECT
 	 		`userId`
 	 		,`friendId`

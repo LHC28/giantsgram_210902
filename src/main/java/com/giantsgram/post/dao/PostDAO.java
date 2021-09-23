@@ -10,26 +10,26 @@ import com.giantsgram.post.model.Post;
 @Repository
 public interface PostDAO {
 
-	public void postCreate(
+	public void insertPost(
 			@Param("userId") int userId
 			,@Param("loginId") String loginId
 			,@Param("content") String content
 			,@Param("imagePath") String imagePath
 			);
 	
-	public Post getPost(
+	public Post selectPost(
 			@Param("userId") int userId
 			,@Param("postId") int postId);
 	
-	public Post getPostByPostId(int postId);
+	public Post selectPostByPostId(int postId);
 	
-	public List<Post> getPostList();
+	public List<Post> selectPostList();
 	
-	public void postDelete(
+	public void deletePost(
 			@Param("userId") int userId
 			,@Param("postId") int postId);
 	
 	public int countPost(int userId);
 	
-	public List<Post> getPostListByUserId(int userId);
+	public List<Post> selectPostListByUserId(int userId);
 }

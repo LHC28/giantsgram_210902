@@ -8,9 +8,13 @@ import com.giantsgram.like.model.Like;
 @Repository
 public interface LikeDAO {
 
-	public Integer getLikeCount(int postId);
+	public void insertLike(
+			@Param("userId") int userId
+			,@Param("postId") int postId);
 	
-	public Like getLikeClick(
+	public Integer selectLikeCount(int postId);
+	
+	public Like selectLikeClick(
 			@Param("userId") int userId
 			,@Param("postId") int postId);
 	
@@ -18,7 +22,4 @@ public interface LikeDAO {
 			@Param("userId") int userId
 			,@Param("postId") int postId);
 	
-	public void addLike(
-			@Param("userId") int userId
-			,@Param("postId") int postId);
 }

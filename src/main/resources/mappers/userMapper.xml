@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.giantsgram.user.dao.UserDAO">
-	<insert id="addUser" parameterType="map">
+	<insert id="insertUser" parameterType="map">
 		INSERT INTO `user`
 		(
 			`loginId`
@@ -77,7 +77,7 @@
 		WHERE
 			`id` = #{userId}
 	</select>
-	<select id="getUserList" resultType="com.giantsgram.user.model.User">
+	<select id="selectUserList" resultType="com.giantsgram.user.model.User">
 		SELECT
 			`id`
 			,`loginId`
@@ -92,7 +92,7 @@
 		FROM
 			`user`
 	</select>
-	<update id="profileChange" parameterType="map">
+	<update id="updateProfile" parameterType="map">
 		UPDATE `user`
 		SET
 			`name` = #{name}

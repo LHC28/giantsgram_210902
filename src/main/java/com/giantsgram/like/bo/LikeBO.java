@@ -13,12 +13,12 @@ public class LikeBO {
 	private LikeDAO likeDAO;
 
 	public Integer getLikeCount(int postId) {
-		Integer num = likeDAO.getLikeCount(postId); // 없는 경우도 생각하기 위해 Integer 사용.
+		Integer num = likeDAO.selectLikeCount(postId); // 없는 경우도 생각하기 위해 Integer 사용.
 		return num;
 	}
 	
 	public boolean getLikeClick(int userId, int postId) {
-		Like like = likeDAO.getLikeClick(userId, postId); 
+		Like like = likeDAO.selectLikeClick(userId, postId); 
 		if(like!=null) {
 			return true;
 		}else {
@@ -31,7 +31,7 @@ public class LikeBO {
 	}
 	
 	public void addLike(int userId, int postId) {
-		likeDAO.addLike(userId, postId);
+		likeDAO.insertLike(userId, postId);
 	}
 	
 }

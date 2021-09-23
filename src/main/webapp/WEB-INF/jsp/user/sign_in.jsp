@@ -24,26 +24,28 @@
 			<div>
 				<div class="loginFrame d-flex align-items-center">
 					<div>
-						<div class="loginBox ml-4">
-							<h2 class="text-center p-4">Giantsgram</h2>
-							<div class="d-flex justify-content-center">
-								<input type="text" id="loginId" class="form-control col-9 loginText" placeholder="아이디를 입력하세요.">
+						<form method="post" action="/user/sign_in">
+							<div class="loginBox ml-4">
+								<h2 class="text-center p-4">Giantsgram</h2>
+								<div class="d-flex justify-content-center">
+									<input type="text" id="loginId" name="loginId" class="form-control col-9 loginText" placeholder="아이디를 입력하세요.">
+								</div>
+								<div class="d-flex justify-content-center">
+									<input type="password" id="password" name="password" class="form-control col-9 mt-3 loginText" placeholder="비밀번호를 입력하세요.">
+								</div>
+								<div class="d-flex justify-content-center mt-3">
+									<input type="submit" class="btn signInBtn col-9 mt-3 loginText" value="로그인">
+								</div>
+								<hr>
+								<div class="d-flex justify-content-center loginWarning d-none">
+									<span class="d-none">입력한 아이디 또는 비밀번호가 다릅니다.<br> 확인하고 다시 시도하세요.</span>
+								</div>
+								<div class="d-flex justify-content-center mt-4 findFont">
+									<a href="#" class="mr-4">아이디 찾기</a>
+									<a href="#">비밀번호 찾기</a>
+								</div>
 							</div>
-							<div class="d-flex justify-content-center">
-								<input type="password" id="password" class="form-control col-9 mt-3 loginText" placeholder="비밀번호를 입력하세요.">
-							</div>
-							<div class="d-flex justify-content-center mt-3">
-								<input type="button" class="btn signInBtn col-9 mt-3 loginText" value="로그인">
-							</div>
-							<hr>
-							<div class="d-flex justify-content-center loginWarning d-none">
-								<span class="d-none">입력한 아이디 또는 비밀번호가 다릅니다.<br> 확인하고 다시 시도하세요.</span>
-							</div>
-							<div class="d-flex justify-content-center mt-4 findFont">
-								<a href="#" class="mr-4">아이디 찾기</a>
-								<a href="#">비밀번호 찾기</a>
-							</div>
-						</div>
+						</form>
 						<div class="moveToSignUpBox ml-4 mt-4 d-flex align-items-center justify-content-center">
 							<span><a href="/user/sign_up_view" class="font-weight-bold">회원가입</a> 하기</span>
 						</div>
@@ -55,7 +57,10 @@
 </body>
 <script>
 	$(document).ready(function(){
+		
 		$('.signInBtn').on('click', function(e){
+			e.preventDefault();
+			
 			let loginId = $('#loginId').val();
 			if(loginId==''){
 				alert("아이디를 입력해주세요.");

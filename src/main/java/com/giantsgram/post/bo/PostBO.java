@@ -29,21 +29,21 @@ public class PostBO {
 				e.printStackTrace();
 			}
 		}
-		postDAO.postCreate(userId, loginId, content, imagePath);
+		postDAO.insertPost(userId, loginId, content, imagePath);
 	}
 	
 	public Post getPostByPostId(int postId) {
-		return postDAO.getPostByPostId(postId);
+		return postDAO.selectPostByPostId(postId);
 	}
 	
 	public List<Post> getPostList(){
-		return postDAO.getPostList();
+		return postDAO.selectPostList();
 	}
 	
 	public boolean postDelete(int userId, int postId) {
-		Post post = postDAO.getPost(userId, postId);
+		Post post = postDAO.selectPost(userId, postId);
 		if(post!=null) {
-			postDAO.postDelete(userId, postId);
+			postDAO.deletePost(userId, postId);
 			return true;
 		}else {
 			return false;
@@ -56,6 +56,6 @@ public class PostBO {
 	}
 	
 	public List<Post> getPostListByUserId(int userId){
-		return postDAO.getPostListByUserId(userId);
+		return postDAO.selectPostListByUserId(userId);
 	}
 }

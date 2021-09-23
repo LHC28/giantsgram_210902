@@ -33,9 +33,14 @@ public class UserRestController {
 			@RequestParam("name") String name,
 			@RequestParam("phoneNumber") String phoneNumber,
 			@RequestParam("email") String email
-			) throws NoSuchAlgorithmException {
+			) {
 		
-		String encryptPassword = SHA256.encrypt(password);
+		String encryptPassword = null;
+		try {
+			encryptPassword = SHA256.encrypt(password);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
 		userBO.addUser(loginId, encryptPassword, name, phoneNumber, email);
 		
 		Map<String, String> result = new HashMap<>();
@@ -65,9 +70,14 @@ public class UserRestController {
 			@RequestParam("loginId") String loginId
 			,@RequestParam("password") String password
 			,HttpServletRequest request
-			) throws NoSuchAlgorithmException{
+			) {
 		// 비밀번호 해싱(SHA256)
-		String encryptPassword = SHA256.encrypt(password);
+		String encryptPassword = null;
+		try {
+			encryptPassword = SHA256.encrypt(password);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
 		// 아이디와 비밀번호로 계정 유무 확인
 		User user = userBO.getUser(loginId, encryptPassword);
 		

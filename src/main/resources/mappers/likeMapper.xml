@@ -2,34 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.giantsgram.like.dao.LikeDAO">
-	<select id="getLikeCount" resultType="Integer">
-		SELECT
-		COUNT(`userId`)
-		FROM
-			`like`
-		WHERE
-			`postId` = #{postId}		
-	</select>
-	<select id="getLikeClick" parameterType="map" resultType="com.giantsgram.like.model.Like">
-		SELECT
-			`userId`
-			,`postId`
-			,`createdAt`
-			,`updatedAt`
-		FROM
-			`like`
-		WHERE
-			`userId` = #{userId}
-			AND `postId` = #{postId}
-	</select>
-	<delete id="deleteLike" parameterType="map">
-		DELETE
-		FROM `like`
-		WHERE
-			`userId` = #{userId}
-			AND `postId` = #{postId}
-	</delete>
-	<insert id="addLike" parameterType="map">
+	<insert id="insertLike" parameterType="map">
 		INSERT INTO `like`
 		(
 		`userId`
@@ -44,6 +17,36 @@
 		,NOW()
 		,NOW()
 		)
-		
 	</insert>
+	
+	<select id="selectLikeCount" resultType="Integer">
+		SELECT
+		COUNT(`userId`)
+		FROM
+			`like`
+		WHERE
+			`postId` = #{postId}		
+	</select>
+	
+	<select id="selectLikeClick" parameterType="map" resultType="com.giantsgram.like.model.Like">
+		SELECT
+			`userId`
+			,`postId`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`like`
+		WHERE
+			`userId` = #{userId}
+			AND `postId` = #{postId}
+	</select>
+	
+	<delete id="deleteLike" parameterType="map">
+		DELETE
+		FROM `like`
+		WHERE
+			`userId` = #{userId}
+			AND `postId` = #{postId}
+	</delete>
+
 </mapper>

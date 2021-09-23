@@ -10,9 +10,9 @@ import com.giantsgram.comment.model.Comment;
 @Repository
 public interface CommentDAO {
 
-	public List<Comment> getCommentList(int postId);
+	public List<Comment> selectCommentListByPostId(int postId);
 	
-	public void addComment(
+	public void insertComment(
 			@Param("userId") int userId
 			,@Param("nickname") String nickname
 			,@Param("postId") int postId

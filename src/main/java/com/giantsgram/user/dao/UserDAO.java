@@ -10,7 +10,7 @@ import com.giantsgram.user.model.User;
 @Repository
 public interface UserDAO {
 
-	public void addUser(
+	public void insertUser(
 			@Param("loginId") String loginId
 			,@Param("password") String password
 			,@Param("name") String name
@@ -26,7 +26,7 @@ public interface UserDAO {
 	
 	public User selectUserById(int userId);
 	
-	public void profileChange(
+	public void updateProfile(
 			@Param("userId") int userId
 			,@Param("name") String name
 			,@Param("nickname") String nickname
@@ -34,5 +34,5 @@ public interface UserDAO {
 			,@Param("email") String email
 			,@Param("imagePath") String imagePath);
 	
-	public List<User> getUserList();
+	public List<User> selectUserList();
 }

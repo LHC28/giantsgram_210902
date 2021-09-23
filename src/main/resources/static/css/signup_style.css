@@ -6,6 +6,7 @@ hr {border:solid 0.5px rgb(217,217,217);}
 .inputBox {width:300px;}
 .inputBoxFont {font-size:13px; color:rgb(217,217,217); width:280px;}
 .inputBoxFont1 {font-size:13px; color:rgb(217,217,217); width:200px;}
+#duplicatedId {width:70px; background-color:rgb(255,122,47); color:white; font-size:8px;}
 .warningFont {font-size:10px; color:red;}
 .greenFont {font-size:10px; color:green;}
 .signUpBtn {background-color:rgb(255,122,47); color: white; font-size:13px;}

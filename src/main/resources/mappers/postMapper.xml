@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.giantsgram.post.dao.PostDAO">
-	<insert id="postCreate" parameterType="map">
+	<insert id="insertPost" parameterType="map">
 		INSERT INTO `post`
 		(
 			`userId`
@@ -22,7 +22,7 @@
 			,NOW()
 		)
 	</insert>
-	<select id="getPost" parameterType="map" resultType="com.giantsgram.post.model.Post">
+	<select id="selectPost" parameterType="map" resultType="com.giantsgram.post.model.Post">
 		SELECT
 			`id`
 			,`userId`
@@ -37,7 +37,7 @@
 			`id` = #{postId}
 			AND `userId` = #{userId}
 	</select>
-	<select id="getPostByPostId" resultType="com.giantsgram.post.model.Post">
+	<select id="selectPostByPostId" resultType="com.giantsgram.post.model.Post">
 		SELECT
 			`id`
 			,`userId`
@@ -51,7 +51,7 @@
 		WHERE
 			`id` = #{postId} 
 	</select>
-	<select id="getPostList" resultType="com.giantsgram.post.model.Post">
+	<select id="selectPostList" resultType="com.giantsgram.post.model.Post">
 		SELECT
 			`id`
 			,`userId`
@@ -70,7 +70,7 @@
 		WHERE
 			`userId` = #{userId}
 	</select>
-	<select id="getPostListByUserId" resultType="com.giantsgram.post.model.Post">
+	<select id="selectPostListByUserId" resultType="com.giantsgram.post.model.Post">
 		SELECT
 			`id`
 			,`userId`
@@ -86,7 +86,7 @@
 		ORDER BY `id` DESC
 	</select>
 	
-	<delete id="postDelete" parameterType="map">
+	<delete id="deletePost" parameterType="map">
 		DELETE
 		FROM
 			`post`
