@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.giantsgram.post.dao.PostDAO">
+	<insert id="insertFile" parameterType="map">
+		INSERT INTO `file`
+		(
+		`userId`
+		,`postId`
+		,`imagePath`
+		)
+		VALUES
+		(
+		#{userId}
+		,#{postId}
+		,#{imagePath}
+		)
+	</insert>
+	<select id="selectFiles" resultType="com.giantsgram.post.model.UploadFile">
+		SELECT
+			`id`
+			,`userId`
+			,`postId`
+			,`imagePath`
+		FROM
+			`file`
+		WHERE
+			`postId` = #{postId}
+	</select>
+	
+</mapper>

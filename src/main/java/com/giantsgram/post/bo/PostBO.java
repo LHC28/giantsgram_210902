@@ -3,6 +3,8 @@ package com.giantsgram.post.bo;
 import java.io.IOException;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -10,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.giantsgram.common.FileManagerService;
 import com.giantsgram.post.dao.PostDAO;
 import com.giantsgram.post.model.Post;
+import com.giantsgram.post.model.UploadFile;
 
 @Service
 public class PostBO {
@@ -20,16 +23,44 @@ public class PostBO {
 	@Autowired
 	private FileManagerService fileManagerService;
 
-	public void postCreate(int userId, String loginId, String content, MultipartFile file) {
-		String imagePath=null;
-		if(file!=null) {
+	Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	public void postCreate(int userId, String loginId, String content, List<MultipartFile> files) {
+		// 업로드 하는 이미지가 하나인 경우 활용
+		String imagePath = null;
+		// 업로드 하는 이미지가 둘 이상인 경우 활용
+		List<String> imagePaths = null;
+		
+		// 업로드 하는 파일이 하나인 경우
+		if(files.size()==1) {
 			try {
-				imagePath = fileManagerService.saveFile(loginId, file);
+				// 파일 가져오는 방식 변경
+				imagePath = fileManagerService.saveFile(loginId, files.get(0));
+				postDAO.insertPost(userId, loginId, content);
+				List<Post> posts = postDAO.selectPostListByUserId(userId);
+				// file DB에 파일 넣기.
+				postDAO.insertFile(userId, posts.get(0).getId(), imagePath);
+				System.out.println("########"+posts.get(posts.size()-1).getId());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		// 업로드 하는 파일이 둘 이상인 경우
+		}else if(files.size()>1) {
+			try {
+				imagePaths = fileManagerService.saveFiles(loginId, files);
+				postDAO.insertPost(userId, loginId, content);
+				List<Post> posts = postDAO.selectPostListByUserId(userId);
+				// file DB에 파일 넣기
+				for(int i=0; i<imagePaths.size(); i++) {
+					// imagePath에 저장된 것들을 하나씩 저장하는 과정.
+					postDAO.insertFile(userId, posts.get(0).getId(), imagePaths.get(i));
+					
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-		postDAO.insertPost(userId, loginId, content, imagePath);
+		
 	}
 	
 	public Post getPostByPostId(int postId) {
@@ -38,6 +69,10 @@ public class PostBO {
 	
 	public List<Post> getPostList(){
 		return postDAO.selectPostList();
+	}
+	
+	public List<UploadFile> getUploadFiles(int postId){
+		return postDAO.selectFiles(postId);
 	}
 	
 	public boolean postDelete(int userId, int postId) {
@@ -57,5 +92,18 @@ public class PostBO {
 	
 	public List<Post> getPostListByUserId(int userId){
 		return postDAO.selectPostListByUserId(userId);
+	}
+	
+	public void addFileList(int userId, String loginId, List<MultipartFile> fileList) {
+		List<String> imagePaths = null;
+		try {
+			imagePaths = fileManagerService.saveFiles(loginId, fileList);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		for(int i=0; i<imagePaths.size(); i++) {
+			logger.info("###########"+imagePaths.get(i));
+			postDAO.insertImagePath(userId, imagePaths.get(i));
+		}
 	}
 }

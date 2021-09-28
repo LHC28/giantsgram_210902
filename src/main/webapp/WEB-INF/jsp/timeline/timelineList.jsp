@@ -25,12 +25,22 @@
 			</div>
 			
 		</div>
-		<c:if test="${not empty timeline.post.imagePath}">
+		<%-- 이미지 여러 개 --%>
+		<c:if test="${timeline.uploadFiles.size() ne 1 && timeline.uploadFiles.size() ne 0}">
 		<div class="timelinePicture">
-			<a href="/post/post_view?postId=${timeline.post.id}">
-			<img src="${timeline.post.imagePath}" alt="게시글 사진" class="timelinePicture">
-			</a>
+			<ul class="bxslider">
+				<c:forEach var="file" items="${timeline.uploadFiles }">
+				<li><img src="${file.imagePath }" class="timelinePicture" /></li>
+				</c:forEach>
+			</ul>
 		</div>
+		</c:if>
+		<c:if test="${timeline.uploadFiles.size() eq 1}">
+			<a href="/post/post_view?postId=${timeline.post.id}">
+			<c:forEach var="file" items="${timeline.uploadFiles}">
+			<img src="${file.imagePath}" alt="게시글 사진" class="timelinePicture">
+			</c:forEach>
+			</a>
 		</c:if>
 		<div class="timelineIconBox d-flex align-items-center">
 			<div class="d-flex">
@@ -359,5 +369,27 @@
 				}
 			});
 		});
+		
+		$('.bxslider').bxSlider( {
+			<%--
+			기본값만 활용해도 사용가능하다. 해당 옵션은 공부가 필요할듯 하다.
+			mode: 'horizontal',// 가로 방향 수평 슬라이드
+			speed: 500, // 이동 속도를 설정
+			pager: true, // 현재 위치 페이징 표시 여부 설정
+			moveSlides: 1, // 슬라이드 이동시 개수
+			slideWidth: 100px, // 슬라이드 너비
+			minSlides: 1, // 최소 노출 개수
+			maxSlides: 10, // 최대 노출 개수
+			slideMargin: 5, // 슬라이드간의 간격
+			auto: true, // 자동 실행 여부
+			autoHover: true, // 마우스 호버시 정지 여부
+			controls: true, // 이전 다음 버튼 노출 여부
+			infiniteLoop: true // 마지막 페이지에서 맨 앞으로
+			--%>
+			
+		});
+
+
+		
 	});
 </script>

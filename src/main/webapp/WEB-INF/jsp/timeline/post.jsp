@@ -3,11 +3,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="postBox d-flex">
 	<div class="postPicture">
-		<c:if test="${not empty timeline.post.imagePath }">
-		<img src="${timeline.post.imagePath }" alt="게시글 사진" width="598px" height="598px">
+		<%-- 이미지가 하나인 경우 --%>
+		<c:if test="${timeline.uploadFiles.size() eq 1 }">
+		<c:forEach var="file" items="${timeline.uploadFiles}">
+		<img src="${file.imagePath }" alt="게시글 사진" width="598px" height="598px">
+		</c:forEach>
 		</c:if>
+		<%-- 이미지가 2개 이상인 경우 --%>
+		<c:if test="${timeline.uploadFiles.size() ne 0 && timeline.uploadFiles.size() ne 1}">
+		<ul class="bxslider">
+			<c:forEach var="file" items="${timeline.uploadFiles }">
+			<li><img src="${file.imagePath }" alt="게시글 사진" width="598px" height="598px" /></li>
+			</c:forEach>
+		</ul>
+		</c:if>
+		
+		
 		<%-- 적절한 파일 찾아 넣기 --%>
-		<c:if test="${empty timeline.post.imagePath }">
+		<c:if test="${timeline.uploadFiles.size() eq 0 }">
 		<img src="/static/images/user.png" alt="게시글 사진" width="598px" height="598px">
 		</c:if>
 	</div>
@@ -212,6 +225,10 @@
 					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 				}
 			});
+		});
+		
+		$('.bxslider').bxSlider( {
+			
 		});
 		
 	});

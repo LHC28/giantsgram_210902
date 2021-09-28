@@ -19,6 +19,13 @@ section a:visited {color:black;}
 section a:active {color:black;}
 
 .timelinePicture{width:614px; height:614px;}
+/* bxslider 적용 */
+.bx-wrapper{-moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none; border: 0;}
+.bx-wrapper .bx-pager {text-align: center; font-size: .85em; font-family: Arial; font-weight: bold; color: #666; padding-top: 20px;
+  bottom: 10px; /* bottom에 10px를 주는 것으로 사각형 밖에 있던 paser가 사각형 안으로 들어간다. */
+}
+
+
 .timelineIconBox {width:614px; height:50px; border: solid 1px rgb(217,217,217);}
 .entireCommentBtn {width:614px; height:10px; color:rgb(217,217,217);}
 .dateFont {font-size:10px; color:rgb(217,217,217);}

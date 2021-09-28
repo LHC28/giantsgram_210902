@@ -14,9 +14,9 @@ import com.giantsgram.friend.bo.FriendBO;
 import com.giantsgram.friend.model.Friend;
 import com.giantsgram.friend.model.FriendUser;
 import com.giantsgram.like.bo.LikeBO;
-import com.giantsgram.like.model.Like;
 import com.giantsgram.post.bo.PostBO;
 import com.giantsgram.post.model.Post;
+import com.giantsgram.post.model.UploadFile;
 import com.giantsgram.timeline.domain.Timeline;
 import com.giantsgram.user.bo.UserBO;
 import com.giantsgram.user.model.User;
@@ -49,6 +49,9 @@ public class TimelineBO {
 		Timeline timeline = new Timeline();
 		timeline.setPost(post);
 		
+		// 게시글 이미지 가져오기
+		List<UploadFile> uploadfiles = postBO.getUploadFiles(post.getId());
+		timeline.setUploadFiles(uploadfiles);
 		// 유저 정보 가져오기
 		User user = userBO.getUserById(post.getUserId());
 		timeline.setUser(user);
@@ -81,6 +84,10 @@ public class TimelineBO {
 			
 			// 게시글 넣기
 			timeline.setPost(post);
+			
+			// 게시글 이미지 파일 가져오기
+			List<UploadFile> uploadfiles = postBO.getUploadFiles(post.getId());
+			timeline.setUploadFiles(uploadfiles);
 			
 			// 유저 정보 넣기
 			User user = userBO.getUserById(post.getUserId());

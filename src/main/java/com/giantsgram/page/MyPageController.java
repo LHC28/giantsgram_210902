@@ -51,6 +51,8 @@ public class MyPageController {
 		List<Post> postList = new ArrayList<>();
 		postList = myPageBO.getPostListByUserId(userId);
 		
+		// 이미지 가져오기
+		
 		// 친구 수 가져오기
 		List<Friend> friendList = new ArrayList<>();
 		friendList = friendBO.getFriendList(userId);

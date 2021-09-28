@@ -4,16 +4,24 @@ import java.util.List;
 
 import com.giantsgram.comment.model.Comment;
 import com.giantsgram.post.model.Post;
+import com.giantsgram.post.model.UploadFile;
 import com.giantsgram.user.model.User;
 
 public class Timeline {
 
 	private User user;
 	private Post post; // 게시물
+	private List<UploadFile> uploadFiles;
 	private List<Comment> commentList; // 게시물에 대한 댓글리스트
 	private int Like; // 게시물에 있는 좋아요 갯수
 	private boolean likeClick; // 접속유저라 좋아요를 눌렀는지 확인하기
 	
+	public List<UploadFile> getUploadFiles() {
+		return uploadFiles;
+	}
+	public void setUploadFiles(List<UploadFile> uploadFiles) {
+		this.uploadFiles = uploadFiles;
+	}
 	public User getUser() {
 		return user;
 	}

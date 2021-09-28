@@ -1,18 +1,20 @@
 package com.giantsgram.post;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.giantsgram.post.bo.PostBO;
 import com.giantsgram.post.model.Post;
@@ -23,22 +25,25 @@ public class PostRestController {
 	
 	@Autowired
 	private PostBO postBO;
+	
 
 	@PostMapping("/create")
 	public Map<String, String> postCreate(
 			@RequestParam("content") String content
-			,@RequestParam(value="file", required=false) MultipartFile file
+			,@RequestParam(value="images", required=false) List<MultipartFile> files
 			,HttpServletRequest request
 			){
+		
 		// 세션 값 가져오기
 		HttpSession session = request.getSession();
 		int userId = (int)session.getAttribute("userId");
 		String loginId = (String) session.getAttribute("loginId");
 		// 등록하기
-		postBO.postCreate(userId, loginId, content, file);
+		postBO.postCreate(userId, loginId, content, files);
 		
 		// 결과 보내기
 		Map<String, String> result = new HashMap<>();
+		
 		// 여기까지 에러없이 진행된다면 성공한 것이기 때문에 아래 값을 넘긴다.
 		result.put("result", "success");
 		

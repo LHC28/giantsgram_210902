@@ -8,7 +8,6 @@
 			`userId`
 			,`loginId`
 			,`content`
-			,`imagePath`
 			,`createdAt`
 			,`updatedAt`
 		)
@@ -17,7 +16,6 @@
 			#{userId}
 			,#{loginId}
 			,#{content}
-			,#{imagePath}
 			,NOW()
 			,NOW()
 		)
