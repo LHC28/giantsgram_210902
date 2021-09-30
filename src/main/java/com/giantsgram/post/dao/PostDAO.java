@@ -33,6 +33,10 @@ public interface PostDAO {
 	
 	public List<UploadFile> selectFiles(int postId);
 	
+	public UploadFile selectFileByPostIdOneFile(int postId);
+	
+	public List<UploadFile> selectImageListByPostId(List<Post> postList);
+	
 	public void deletePost(
 			@Param("userId") int userId
 			,@Param("postId") int postId);

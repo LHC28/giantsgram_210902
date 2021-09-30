@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.giantsgram.post.bo.PostBO;
 import com.giantsgram.post.model.Post;
+import com.giantsgram.post.model.UploadFile;
 import com.giantsgram.user.bo.UserBO;
 import com.giantsgram.user.model.User;
 
@@ -29,5 +30,9 @@ public class MyPageBO {
 	
 	public List<Post> getPostListByUserId(int userId){
 		return postBO.getPostListByUserId(userId);
+	}
+	
+	public List<UploadFile> getImageListByPostId(List<Post> postList){
+		return postBO.getImageListByPostId(postList);
 	}
 }

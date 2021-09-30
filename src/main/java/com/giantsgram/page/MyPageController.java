@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.giantsgram.friend.bo.FriendBO;
 import com.giantsgram.friend.model.Friend;
 import com.giantsgram.page.bo.MyPageBO;
+import com.giantsgram.page.model.PostWithImage;
 import com.giantsgram.post.model.Post;
+import com.giantsgram.post.model.UploadFile;
 import com.giantsgram.user.bo.UserBO;
 import com.giantsgram.user.model.User;
 
@@ -52,6 +54,19 @@ public class MyPageController {
 		postList = myPageBO.getPostListByUserId(userId);
 		
 		// 이미지 가져오기
+		// postList순으로 가져오기 때문에 순서는 같다.
+		List<UploadFile> imageList = new ArrayList<>();
+		imageList = myPageBO.getImageListByPostId(postList);
+		// post와 image를 같이 묶기
+		List<PostWithImage> postWithImage = new ArrayList<>();
+		
+		for(int i=0; i<postList.size(); i++) {
+			PostWithImage postWithImageSingle = new PostWithImage();
+			postWithImageSingle.setPost(postList.get(i));
+			postWithImageSingle.setUploadFile(imageList.get(i));
+			
+			postWithImage.add(postWithImageSingle);
+		}
 		
 		// 친구 수 가져오기
 		List<Friend> friendList = new ArrayList<>();
@@ -60,7 +75,7 @@ public class MyPageController {
 		
 		model.addAttribute("user", user);
 		model.addAttribute("postCount",count);
-		model.addAttribute("postList", postList);
+		model.addAttribute("postWithImage", postWithImage);
 		model.addAttribute("friendCount", friendCount);
 		model.addAttribute("view", "page/personal_page");
 		return "template/layout";

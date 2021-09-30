@@ -22,11 +22,12 @@
 				</div>
 			</div>
 			<div>
+			
 				<div class="loginFrame d-flex align-items-center">
 					<div>
 						<form method="post" action="/user/sign_in">
 							<div class="loginBox ml-4">
-								<h2 class="text-center p-4">Giantsgram</h2>
+								<h2 class="loginBoxTitle text-center p-4">Giantsgram</h2>
 								<div class="d-flex justify-content-center">
 									<input type="text" id="loginId" name="loginId" class="form-control col-9 loginText" placeholder="아이디를 입력하세요.">
 								</div>
@@ -51,6 +52,7 @@
 						</div>
 					</div>
 				</div>
+				
 			</div>
 		</div>
 	</div>

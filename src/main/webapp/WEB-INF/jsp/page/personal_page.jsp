@@ -28,14 +28,14 @@
 	<%-- 향후 추가할 수 있을듯... --%>
 	<div class="contentChoiceBox"></div>
 	<div class="d-flex flex-wrap">
-		<c:forEach var="post" items="${postList }">
+		<c:forEach var="pwi" items="${postWithImage }">
 		<div class="contentChoicePicture mb-3">
-			<c:if test="${not empty post.imagePath }">
-			<a href="" class="post" data-post-id=${post.id }>
-				<img src="${post.imagePath}" alt="게시글 사진" width="293px" height="293px"">
+			<c:if test="${not empty pwi.uploadFile.imagePath }">
+			<a href="" class="post" data-post-id=${pwi.post.id }>
+				<img src="${pwi.uploadFile.imagePath}" alt="게시글 사진" width="293px" height="293px"">
 			</a>
 			</c:if>
-			<c:if test="${empty post.imagePath }">
+			<c:if test="${empty pwi.uploadFile.imagePath }">
 			<a href="" class="post" data-post-id=${post.id }>
 				<img src="/static/images/user.png" alt="게시글 사진" width="293px" height="293px"">
 			</a>

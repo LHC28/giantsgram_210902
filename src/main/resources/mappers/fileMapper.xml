@@ -27,5 +27,18 @@
 		WHERE
 			`postId` = #{postId}
 	</select>
+	<select id="selectFileByPostIdOneFile" resultType="com.giantsgram.post.model.UploadFile">
+		SELECT
+			`id`
+			,`userId`
+			,`postId`
+			,`imagePath`
+		FROM
+			`file`
+		WHERE
+			`postId` = #{postId}
+		LIMIT
+			1
+	</select>
 	
 </mapper>

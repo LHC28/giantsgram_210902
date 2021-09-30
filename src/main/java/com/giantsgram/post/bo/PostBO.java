@@ -1,6 +1,7 @@
 package com.giantsgram.post.bo;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -71,8 +72,18 @@ public class PostBO {
 		return postDAO.selectPostList();
 	}
 	
+	// 이미지가 여러 개인 경우 여러 개를 모두 가져온다.
 	public List<UploadFile> getUploadFiles(int postId){
 		return postDAO.selectFiles(postId);
+	}
+	// 여기서는 여러 개 있는 경우도 하나만 가져오도록 한다.
+	public List<UploadFile> getImageListByPostId(List<Post> postList){
+		List<UploadFile> imageList = new ArrayList<>();
+		for(int i=0; i<postList.size(); i++) {
+			UploadFile image = postDAO.selectFileByPostIdOneFile(postList.get(i).getId());
+			imageList.add(image);
+		}
+		return imageList;
 	}
 	
 	public boolean postDelete(int userId, int postId) {
