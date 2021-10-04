@@ -53,4 +53,21 @@ public class UserBO {
 	public List<User> getUserList(){
 		return userDAO.selectUserList();
 	}
+	
+	public String getLoginIdByNameAndEmail(String name, String email) {
+		return userDAO.selectLoginIdMyNameAndEmail(name, email);
+	}
+	
+	public boolean getEmailByNameAndEmail(String loginId, String email) {
+		String getEmail = userDAO.selectEmailByLoginId(loginId);
+		if(email.equals(getEmail)) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	public void changePasswordByLoginId(String loginId, String password) {
+		userDAO.updatePasswordByloginId(loginId, password);
+	}
 }

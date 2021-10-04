@@ -26,7 +26,6 @@
 			,`userId`
 			,`loginId`
 			,`content`
-			,`imagePath`
 			,`createdAt`
 			,`updatedAt`
 		FROM
@@ -41,7 +40,6 @@
 			,`userId`
 			,`loginId`
 			,`content`
-			,`imagePath`
 			,`createdAt`
 			,`updatedAt`
 		FROM
@@ -55,7 +53,6 @@
 			,`userId`
 			,`loginId`
 			,`content`
-			,`imagePath`
 			,`createdAt`
 			,`updatedAt`
 		FROM
@@ -74,7 +71,6 @@
 			,`userId`
 			,`loginId`
 			,`content`
-			,`imagePath`
 			,`createdAt`
 			,`updatedAt`
 		FROM

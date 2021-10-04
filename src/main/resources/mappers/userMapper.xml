@@ -92,6 +92,23 @@
 		FROM
 			`user`
 	</select>
+	<select id="selectLoginIdMyNameAndEmail" parameterType="map" resultType="String">
+		SELECT
+			`loginId`
+		FROM
+			`user`
+		WHERE
+			`name` = #{name}
+			AND `email` = #{email}
+	</select>
+	<select id="selectEmailByLoginId" resultType="String">
+		SELECT
+			`email`
+		FROM
+			`user`
+		WHERE
+			`loginId` = #{loginId}
+	</select>
 	<update id="updateProfile" parameterType="map">
 		UPDATE `user`
 		SET
@@ -103,5 +120,12 @@
 			,`updatedAt` = NOW()
 		WHERE
 			`id` = #{userId}
+	</update>
+	<update id="updatePasswordByloginId" parameterType="map">
+		UPDATE `user`
+		SET
+			`password` = #{password}
+		WHERE
+			`loginId` = #{loginId}
 	</update>
 </mapper>

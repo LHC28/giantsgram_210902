@@ -3,11 +3,16 @@ package com.giantsgram.user;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +29,9 @@ public class UserRestController {
 	
 	@Autowired
 	private UserBO userBO;
+	
+	@Autowired
+	public JavaMailSender javaMailSender;
 	
 	// 회원가입
 	@PostMapping("/sign_up")
@@ -100,6 +108,7 @@ public class UserRestController {
 	
 	@PostMapping("/profile_change")
 	public Map<String, String> profileChange(
+			
 			@RequestParam("name") String name
 			,@RequestParam("nickname") String nickname
 			,@RequestParam("phoneNumber") String phoneNumber
@@ -127,6 +136,90 @@ public class UserRestController {
 		result.put("result", "success");
 		return result;
 	}
-
+	
+	@PostMapping("/find_id")
+	public Map<String, String> findId(
+			@RequestParam("name") String name
+			,@RequestParam("email") String email
+			,Model model
+			){
+		Map<String, String> result = new HashMap<>();
+		
+		String loginId = userBO.getLoginIdByNameAndEmail(name, email);
+		
+		// 결과값에 따라 값 넘기기 - 성공시 success, 실패시 fail
+		if(loginId==null) {
+			result.put("result", "fail");
+		}else {
+			result.put("result", "success");
+			result.put("loginId", loginId);
+		}
+		return result;
+	}
+	
+	@PostMapping("/email_check")
+	public Map<String, String> emailCheck(
+			@RequestParam("loginId") String loginId
+			,@RequestParam("email") String email
+			){
+		Map<String, String> result = new HashMap<>();
+		
+		boolean check = userBO.getEmailByNameAndEmail(loginId, email);
+		if(check==true) {
+			result.put("result", "success");
+		}else {
+			result.put("result", "fail");
+		}
+	
+		return result;
+	}
+	
+	@PostMapping("/send_email")
+	public Map<String, String> sendMail(
+			@RequestParam("email") String email) {
+		Map<String, String> result = new HashMap<>();
+		
+		Random ran = new Random();
+		String num = "";
+		for(int i=0; i<6; i++) {
+			int no = ran.nextInt(10);
+			num+=no;
+		}
+		SimpleMailMessage simpleMessage = new SimpleMailMessage();
+		simpleMessage.setFrom("zzangth95@naver.com");
+		simpleMessage.setTo(email);
+		simpleMessage.setSubject("이메일 인증번호");
+		simpleMessage.setText("인증번호 : "+num+" 입니다.");
+		javaMailSender.send(simpleMessage);
+		
+		result.put("result", "success");
+		result.put("num", num);
+		return result;
+	}
+	
+	@PostMapping("/change_password")
+	public Map<String, String> changePassword(
+			@RequestParam("loginId") String loginId
+			){
+		Random ran = new Random();
+		Map<String, String> result = new HashMap<>();
+		String password = "";
+		for(int i=0; i<8; i++) {
+			int num = ran.nextInt(10);
+			password+=num;
+		}
+		String encryptPassword = null;
+		try {
+			encryptPassword = SHA256.encrypt(password);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		
+		userBO.changePasswordByLoginId(loginId, encryptPassword);
+		result.put("result", "success");
+		result.put("password", password);
+		
+		return result;
+	}
 	
 }

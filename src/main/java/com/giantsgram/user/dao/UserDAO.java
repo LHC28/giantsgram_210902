@@ -35,4 +35,14 @@ public interface UserDAO {
 			,@Param("imagePath") String imagePath);
 	
 	public List<User> selectUserList();
+	
+	public String selectLoginIdMyNameAndEmail(
+			@Param("name") String name
+			,@Param("email") String email);
+	
+	public String selectEmailByLoginId(String loginId);
+	
+	public void updatePasswordByloginId(
+			@Param("loginId") String loginId
+			,@Param("password") String password);
 }

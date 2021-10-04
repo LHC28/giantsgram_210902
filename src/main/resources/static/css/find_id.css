@@ -1,0 +1,14 @@
+@charset "UTF-8";
+#wrap {width:700px; height:700px; margin:auto;}
+.findIdBox {width:500px; height:500px; border: solid 1px rgb(217,217,217);}
+.findIdBoxTitle {height:50px; font-size:30px; color: rgb(255,122,47);}
+.findIdBoxContent {width:400px; height:350px;}
+.fintIdBoxContentBox {width:300px; height:50px;}
+.findIdBtn {width:300px;}
+.findIdBoxSignUp{color:rgb(255,122,47); font-weight:bold;}
+.fintIdBoxContentBox a {text-decoration:none;}
+.fintIdBoxContentBox a:link{color:rgb(255,122,47);}
+.fintIdBoxContentBox a:visited{color:rgb(255,122,47);}
+.fintIdBoxContentBox a:hover{color:rgb(255,122,47);}
+.fintIdBoxContentBox a:active{color:rgb(255,122,47);}
+.idEmailCheck {font-size:10px; color: red;}

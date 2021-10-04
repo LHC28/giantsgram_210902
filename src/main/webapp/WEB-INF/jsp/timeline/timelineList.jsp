@@ -28,11 +28,13 @@
 		<%-- 이미지 여러 개 --%>
 		<c:if test="${timeline.uploadFiles.size() ne 1 && timeline.uploadFiles.size() ne 0}">
 		<div class="timelinePicture">
+			<a href="/post/post_view?postId=${timeline.post.id}">
 			<ul class="bxslider">
 				<c:forEach var="file" items="${timeline.uploadFiles }">
 				<li><img src="${file.imagePath }" class="timelinePicture" /></li>
 				</c:forEach>
 			</ul>
+			</a>
 		</div>
 		</c:if>
 		<c:if test="${timeline.uploadFiles.size() eq 1}">
@@ -194,10 +196,10 @@
 						<div class="d-flex">
 							<div class="ml-2">
 								<c:if test="${friend.user.imagePath ne null}">
-								<img src="${friend.user.imagePath}" alt="친구 프로필 사진" width="30px" height="30px">
+								<img src="${friend.user.imagePath}" alt="친구 프로필 사진" width="30px" height="30px" class="friendImage">
 								</c:if>
 								<c:if test="${friend.user.imagePath eq null}">
-								<img src="/static/images/user.png" alt="친구 프로필 사진" width="30px" height="30px">
+								<img src="/static/images/user.png" alt="친구 프로필 사진" width="30px" height="30px" class="friendImage">
 								</c:if>
 							</div>
 							<div class="ml-2">

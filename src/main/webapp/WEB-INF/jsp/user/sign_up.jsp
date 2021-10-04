@@ -70,8 +70,8 @@
 						$('.warningFont').removeClass('d-none');
 						$('.greenFont').addClass('d-none');
 					}
-				},error: function(e){
-					alert(e);
+				},error:function(request,status,error){
+					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 				}
 			});
 		});

@@ -20,8 +20,9 @@ public class FileManagerService {
 		private Logger logger = LoggerFactory.getLogger(this.getClass());
 		
 		// 이미지 저장 경로
-		public final static String FILE_UPLOAD_PATH="C:\\team SNS\\workspace\\Giantsgram\\images/";
-		
+		//public final static String FILE_UPLOAD_PATH="C:\\team SNS\\workspace\\Giantsgram\\images/";
+		// aws로 옮길 때...
+		public final static String FILE_UPLOAD_PATH= "/home/ec2-user/upload_images/";
 		// 이미지 저장
 		public String saveFile(String userLoginId, MultipartFile file) throws IOException {
 			

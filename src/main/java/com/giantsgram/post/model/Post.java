@@ -8,7 +8,6 @@ public class Post {
 	private int userId;
 	private String loginId;
 	private String content;
-	private String imagePath;
 	private Date createdAt;
 	private Date updatedAt;
 	
@@ -35,12 +34,6 @@ public class Post {
 	}
 	public void setContent(String content) {
 		this.content = content;
-	}
-	public String getImagePath() {
-		return imagePath;
-	}
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
 	}
 	public Date getCreatedAt() {
 		return createdAt;

@@ -9,6 +9,16 @@ spring:
     view:
       prefix: /WEB-INF/jsp/
       suffix: .jsp
-    
-server:
+  mail:
+    host: smtp.naver.com
+    port: 465
+    username: zzangth95@naver.com
+    password: ">th7942315"
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl:
+            enable: true
+            trust: smtp.naver.comserver:
   port: 80

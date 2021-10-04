@@ -44,7 +44,17 @@ public class UserController {
 		return "redirect:/user/sign_in_view";
 	}
 	
-
+	@RequestMapping("/find_id")
+	public String findId() {
+		
+		return "/user/find_id";
+	}
+	
+	@RequestMapping("/find_password")
+	public String findPassword() {
+		
+		return "/user/find_password";
+	}
 	
 	
 

@@ -42,8 +42,8 @@
 									<span class="d-none">입력한 아이디 또는 비밀번호가 다릅니다.<br> 확인하고 다시 시도하세요.</span>
 								</div>
 								<div class="d-flex justify-content-center mt-4 findFont">
-									<a href="#" class="mr-4">아이디 찾기</a>
-									<a href="#">비밀번호 찾기</a>
+									<a href="/user/find_id" class="mr-4">아이디 찾기</a>
+									<a href="/user/find_password">비밀번호 찾기</a>
 								</div>
 							</div>
 						</form>

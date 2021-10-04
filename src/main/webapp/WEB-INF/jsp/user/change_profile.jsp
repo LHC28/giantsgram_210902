@@ -53,6 +53,16 @@
 	</div>
 </div>
 <script>
+
+	<%--
+	response.setHeader("Cache-Control", "no-store");  //HTTP 1.1
+	repsonse.setHeader("Pragma", "no-cache");  // HTTP 1.1
+	response.setDateHeader("Expires",0);  //proxy server
+	if (request.getProtocol().equals("HTTP/1.1"))
+	    tesponse.setHeader("Cache-Control","no-cache")l
+	--%>
+
+
 	// 사진 선택시 미리보기를 하기 위해 넣는 function
 	function setImageFromFile(input, expression) {
 	    if (input.files && input.files[0]) {
@@ -126,6 +136,7 @@
 			formData.append('phoneNumber',phoneNumber);
 			formData.append('email',email);
 			formData.append('picture',picture);
+			
 			$.ajax({
 				type: 'post'
 				,url: '/user/profile_change'
@@ -134,14 +145,18 @@
 				,processData: false
 				,contentType: false
 				,success: function(data){
-					location.href="/timeline/post_list_view"
+					alert("ㅇㅇ" + data.result);
+					if(data.result=="success"){
+						location.href="/page/my_page_view"
+					}else{
+						alert("프로필 변경에 실패하였습니다. 관리자에게 문의해주세요.");
+						//location.href="/page/my_page_view"
+					}
+					
 				},error:function(request,status,error){
 					alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 				}
 			});
-			
-			
-			
 		});
 	});
 </script>
