@@ -28,13 +28,14 @@ public class PermissionInterceptor implements HandlerInterceptor {
 		
 		// 로그인이 되어있지 않으면 로그인 화면으로 이동하도록 설정
 		// 프로필 변경 화면이 user에 있으므로 아래와 같이 로그인과 회원가입 화면이 아닐 경우를 조건으로 달아주어야 한다.
+		
 		if(loginId==null && !uri.startsWith("/user")) {
 			response.sendRedirect("/user/sign_in_view");
 			return false;
 		}
 		
 		// 로그인이 되어있는데 로그인 화면이나 회원가입 화면으로 넘어가려는 경우 게시물리스트 페이지로 이동
-		if(loginId!=null  && uri.startsWith("/user")) {
+		if(loginId!=null  && uri.startsWith("/user/sign")) {
 			response.sendRedirect("/timeline/post_list_view");
 			return false;
 		}

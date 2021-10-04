@@ -145,7 +145,6 @@
 				,processData: false
 				,contentType: false
 				,success: function(data){
-					alert("ㅇㅇ" + data.result);
 					if(data.result=="success"){
 						location.href="/page/my_page_view"
 					}else{

@@ -24,7 +24,10 @@ public class WebMvcConfig implements WebMvcConfigurer{
 	// 사진을 웹주소로 가져올 수 있게 해주는 기능
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		// mapping되는 주소
 		registry.addResourceHandler("/images/**")
-		.addResourceLocations("file:///C:\\team SNS\\workspace\\Giantsgram\\images/");
+		// 실제 저장 장소
+		//.addResourceLocations("file:///C:\\team SNS\\workspace\\Giantsgram\\images/");
+		.addResourceLocations("file:///home/ec2-user/upload_images/");
 	}
 }
