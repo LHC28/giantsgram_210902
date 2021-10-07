@@ -5,5 +5,4 @@
 * 시연 모습
 
   * 로그인 창에서 이동<br>
-    <img src="C:/Users/zzang/Desktop/gifcollection/login.gif" width="100" height="100">
-    <img src="C:\Users\zzang\Desktop\ace2.jpg"  width="700" height="370">
+    ![login](https://user-images.githubusercontent.com/86460929/136328990-7b86529b-950d-4ff9-953e-0d5056a4655c.gif)
