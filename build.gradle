@@ -30,6 +30,8 @@ dependencies {
     implementation 'javax.servlet:jstl:1.2'
     // 이메일 인증 관련
     implementation 'org.springframework.boot:spring-boot-starter-mail'
+    // application.yml 암호화 관련
+    implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.3'
 }
 
 test {

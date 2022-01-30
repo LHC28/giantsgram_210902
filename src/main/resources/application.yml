@@ -20,5 +20,10 @@ spring:
           auth: true
           ssl:
             enable: true
-            trust: smtp.naver.comserver:
+            trust: smtp.naver.com
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
+    password : 5678
+    server:
   port: 80
