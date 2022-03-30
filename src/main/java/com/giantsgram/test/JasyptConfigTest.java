@@ -1,7 +1,9 @@
 package com.giantsgram.test;
 
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
+
 public class JasyptConfigTest {
-	 @Test
+	 /*@Test
 	    void jasypt(){
 	        String url = "jdbc:postgresql://localhost:5432/postgres";
 	        String username = "postgres";
@@ -32,5 +34,5 @@ public class JasyptConfigTest {
 	        encryptor.setAlgorithm("PBEWithMD5AndDES");
 	        encryptor.setPassword(key);
 	        return encryptor.decrypt(input);
-	    }
+	    }*/
 }

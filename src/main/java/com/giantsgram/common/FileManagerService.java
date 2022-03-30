@@ -49,7 +49,7 @@ public class FileManagerService {
 			
 		}
 		
-public List<String> saveFiles(String userLoginId, List<MultipartFile> fileList) throws IOException {
+		public List<String> saveFiles(String userLoginId, List<MultipartFile> fileList) throws IOException {
 			
 			// 1. 파일 경로 만들기(폴더) - 안 겹치게. 이름이 겹치는 것도 있을 수 있기 때문
 			// 폴더 이름 만들기
